@@ -9,20 +9,43 @@
 </head>
 
 <body>
-  <header>
-    <div id="title">
-      <h1>Balloon Popper</h1>
-    </div>
-  </header>
+  <!-- Current Score -->
+  <div id="score-count">
+    <h3>Score: <span id="score-number">0</span></h3>
+  </div>
 
-  <main class="app">
-    <div id="games-container">
-      <!-- Add our Game -->
-    </div>
-    <div id="top-scores">
-      <!-- Add our top score users -->
-    </div>
-  </main>
+  <div id="game-container">
+    <!-- Game Content -->
+  </div>
+
+  <!-- Top Scores -->
+  <div id="top-scores">
+    <table>
+      <thead>
+        <tr>
+          <th colspan="3">
+            <h1>Top 10 Scores</h1>
+          </th>
+        </tr>
+        <tr>
+          <td>User</td>
+          <td>Score</td>
+          <td>Date Played</td>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+
+  <!-- Balloons -->
+  <div class="balloons" hidden>
+    <img id="blue" src="styles/images/balloons/blue.png">
+    <img id="green" src="styles/images/balloons/green.png">
+    <img id="orange" src="styles/images/balloons/orange.png">
+    <img id="purple" src="styles/images/balloons/purple.png">
+    <img id="red" src="styles/images/balloons/red.png">
+    <img id="yellow" src="styles/images/balloons/yellow.png">
+  </div>
 
   <!-- Scripts -->
   <script src="index.js"></script>
