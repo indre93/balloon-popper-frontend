@@ -1,11 +1,12 @@
 const BASE_URL = "http://localhost:3000";
 const gameContainer = document.getElementById("game-container");
 const balloons = document.querySelectorAll(".balloons img");
+let score = 1;
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchAndLoadUsers();
   fetchAndLoadGames();
-  renderBalloons();
+  renderBalloon();
 });
 
 function fetchAndLoadUsers() {
@@ -34,10 +35,21 @@ function fetchAndLoadGames() {
     });
 }
 
-function renderBalloons() {
+function renderBalloon() {
   let balloon = getRandomBalloon();
   gameContainer.append(balloon);
-  balloon;
+
+  balloon.addEventListener("click", function (e) {
+    if (e.type === "click") {
+      updateScore();
+      e.target.remove();
+    }
+  });
+}
+
+function updateScore() {
+  let scoreCount = document.getElementById("score-count");
+  scoreCount.innerHTML = `<p>Score: ${(score++) * 10}</p>`;
 }
 
 function getRandomBalloon() {
