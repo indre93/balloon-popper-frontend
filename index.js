@@ -1,10 +1,11 @@
-const BASE_URL = 'http://localhost:3000';
-const usersArray = [];
-const gamesArray = [];
+const BASE_URL = "http://localhost:3000";
+const gameContainer = document.getElementById("game-container");
+const balloons = document.querySelectorAll(".balloons img");
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchAndLoadUsers();
   fetchAndLoadGames();
+  renderBalloons();
 });
 
 function fetchAndLoadUsers() {
@@ -12,9 +13,7 @@ function fetchAndLoadUsers() {
     .then(response => response.json())
     .then(users => {
       for (let user of users) {
-        let newUser = new User(user.id, user.username);
-        usersArray.push(newUser);
-        newUser.renderUser();
+        new User(user.id, user.username);
       }
     });
 }
@@ -24,11 +23,27 @@ function fetchAndLoadGames() {
     .then(response => response.json())
     .then(games => {
       for (let game of games) {
-        let newGame = new Game(game.id, game.user.username, game.score);
-        gamesArray.push(newGame);
-        newGame.renderGame();
+        let fetchedGame = new Game(
+          game.id,
+          game.user.username,
+          game.score,
+          game.created_at
+        );
+        fetchedGame.renderTopGames();
       }
     });
 }
 
+function renderBalloons() {
+  let balloon = getRandomBalloon();
+  gameContainer.append(balloon);
+  balloon;
+}
+
+function getRandomBalloon() {
+  for (let i = 0; i < balloons.length; i++) {
+    color = balloons[Math.floor(Math.random() * balloons.length)];
+  }
+  return color;
+}
 
