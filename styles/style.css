@@ -1,28 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+}
+
 body {
-  margin: 0;
+  font-family: "Comic Sans MS";
   background-color: rgb(39, 39, 39);
-  display: flex;
-  justify-content: center;
 }
 
-div#title {
-  background-color: rgb(9, 107, 177);
-  font-family: "Courier New", Courier, monospace;
-  margin: 0;
-  border: 25px solid transparent;
-  padding: 20px;
+#score-count {
+  font-family: "Helvetica";
+  font-size: 50px;
+  text-align: center;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #1d1c1c;
+  width: 400px;
+  height: 75px;
 }
 
-div#games-container {
-  background-color: rgb(9, 107, 177);
+table {
+  margin: 5px;
+  text-align: center;
+  padding: 10px;
+}
+
+thead {
+  background-image: url(images/final-night.png);
+  padding: 10px;
+}
+
+table,
+td {
+  border: 1px solid rgb(27, 27, 27);
+  list-style-position: inside;
+}
+
+#game-container {
+  border: 2px solid #1d1c1c;
+  background-image: url(images/final-night.png);
+  background-position: center;
+  background-size: cover;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 800px;
+  width: 700px;
   height: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
+  cursor: url(images/dart.png), auto;
 }
