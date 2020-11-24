@@ -1,11 +1,13 @@
 const BASE_URL = "http://localhost:3000";
 const gameContainer = document.getElementById("game-container");
 const colors = ["blue", "green", "orange", "purple", "red", "yellow"];
+let twoMinutes = 60 * 2;
 let score = 1;
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchAndLoadUsers();
   fetchAndLoadGames();
+  startTimer(twoMinutes);
   renderBalloons();
 });
 
@@ -74,3 +76,19 @@ function updateScore() {
   let scoreCount = document.getElementById("score-count");
   scoreCount.innerHTML = `<p>Score: ${(score++) * 10}</p>`;
 }
+
+function startTimer(duration) {
+  let countdown = document.getElementById("timer");
+  let timer = duration, minutes, seconds;
+  counter = setInterval(() => {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    countdown.innerHTML = `<p>${minutes}:${seconds}</p>`;
+    --timer;
+    if (timer < 0) {
+      clearInterval(counter);
+    }
+  }, 1000);
+};
