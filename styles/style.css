@@ -11,27 +11,26 @@ body {
 }
 
 #score-count {
+  z-index: 1;
   background-image: url(../images/final-night.png);
   margin-block: 50px;
-  padding: 5px;
-  width: 400px;
+  padding-inline: 10px;
   left: 50%;
   font-family: "Helvetica";
   font-size: 50px;
   text-align: center;
-  position: absolute;
+  position: fixed;
   transform: translate(-50%, -50%);
-  border: 2px solid #1d1c1c;
+  border: 1px solid rgb(75, 75, 75);
 }
 
 table {
-  margin: 5px;
   text-align: center;
+  position: fixed;
 }
 
 thead {
   background-image: url(../images/final-night.png);
-  padding: 10px;
 }
 
 table,
@@ -45,7 +44,9 @@ td {
 }
 
 #game-container {
-  border: 2px solid #1d1c1c;
+  z-index: 2;
+  border: 2px solid rgb(130, 129, 129);
+  border-style: inset;
   background-image: url(../images/final-night.png);
   background-position: center;
   background-size: cover;
@@ -57,4 +58,15 @@ td {
   height: 500px;
   overflow: hidden;
   cursor: url(../images/dart.png), auto;
+}
+
+#green,
+#blue,
+#orange,
+#purple,
+#red,
+#yellow {
+  padding: 4px;
+  width: 10%;
+  height: auto;
 }

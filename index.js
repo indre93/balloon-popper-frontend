@@ -1,12 +1,12 @@
 const BASE_URL = "http://localhost:3000";
 const gameContainer = document.getElementById("game-container");
-const balloons = document.querySelectorAll(".balloons img");
+const colors = ["blue", "green", "orange", "purple", "red", "yellow"];
 let score = 1;
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchAndLoadUsers();
   fetchAndLoadGames();
-  renderBalloon();
+  renderBalloons();
 });
 
 function fetchAndLoadUsers() {
@@ -35,27 +35,42 @@ function fetchAndLoadGames() {
     });
 }
 
-function renderBalloon() {
-  let balloon = getRandomBalloon();
-  gameContainer.append(balloon);
-
-  balloon.addEventListener("click", function (e) {
-    if (e.type === "click") {
-      updateScore();
-      e.target.remove();
-    }
+function getBalloonImages() {
+  return colors.map(color => {
+    img = document.createElement("img");
+    img.id = `${color}`;
+    img.src = `images/balloons/${color}.png`;
+    return img;
   });
+}
+
+function pickRandomBalloon() {
+  let balloons = getBalloonImages();
+  let balloon = balloons[Math.floor(Math.random() * balloons.length)];
+  gameContainer.append(balloon);
+  return balloon;
+}
+
+function renderBalloons() {
+  let balloons = [];
+  for (let i = 0; gameContainer.childElementCount < 40; i++) {
+    if (gameContainer.childElementCount < 40) {
+      balloons.push(pickRandomBalloon());
+    }
+  }
+
+  balloons.forEach(balloon =>
+    balloon.addEventListener("click", function (e) {
+      if (e.type === "click") {
+        e.target.remove();
+        updateScore();
+        renderBalloons();
+      }
+    })
+  );
 }
 
 function updateScore() {
   let scoreCount = document.getElementById("score-count");
   scoreCount.innerHTML = `<p>Score: ${(score++) * 10}</p>`;
 }
-
-function getRandomBalloon() {
-  for (let i = 0; i < balloons.length; i++) {
-    color = balloons[Math.floor(Math.random() * balloons.length)];
-  }
-  return color;
-}
-
