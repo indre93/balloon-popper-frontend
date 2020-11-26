@@ -1,6 +1,12 @@
 const BASE_URL = "http://localhost:3000";
 const gameContainer = document.getElementById("game-container");
 const colors = ["blue", "green", "orange", "purple", "red", "yellow"];
+let scoreCount = document.getElementById("score-count");
+let balloons = [];
+let balloonDragged;
+let balloonReplaced;
+let balloonDraggedId;
+let balloonReplacedId;
 let twoMinutes = 60 * 2;
 let score = 1;
 
@@ -40,7 +46,6 @@ function fetchAndLoadGames() {
 function getBalloonImages() {
   return colors.map(color => {
     img = document.createElement("img");
-    img.id = `${color}`;
     img.src = `images/balloons/${color}.png`;
     return img;
   });
@@ -51,25 +56,6 @@ function pickRandomBalloon() {
   let balloon = balloons[Math.floor(Math.random() * balloons.length)];
   gameContainer.append(balloon);
   return balloon;
-}
-
-function renderBalloons() {
-  let balloons = [];
-  for (let i = 0; gameContainer.childElementCount < 40; i++) {
-    if (gameContainer.childElementCount < 40) {
-      balloons.push(pickRandomBalloon());
-    }
-  }
-
-  balloons.forEach(balloon =>
-    balloon.addEventListener("click", function (e) {
-      if (e.type === "click") {
-        e.target.remove();
-        updateScore();
-        renderBalloons();
-      }
-    })
-  );
 }
 
 function updateScore() {
@@ -92,3 +78,58 @@ function startTimer(duration) {
     }
   }, 1000);
 };
+
+function renderBalloons() {
+  for (let i = 0; gameContainer.childElementCount < 40; i++) {
+    if (gameContainer.childElementCount < 40) {
+      balloon = pickRandomBalloon();
+      balloon.id = i;
+      balloons.push(balloon);
+    }
+  }
+
+  balloons.forEach(balloon => balloon.addEventListener("dragstart", dragStart));
+  balloons.forEach(balloon => balloon.addEventListener("dragover", dragOver));
+  balloons.forEach(balloon => balloon.addEventListener("drop", dragDrop));
+}
+
+// occurs when the user starts to drag an element
+function dragStart() {
+  balloonDragged = this.src;
+  balloonDraggedId = parseInt(this.id);
+}
+
+// occurs when the dragged element is over the drop target
+function dragOver(e) {
+  e.preventDefault();
+}
+
+// occurs when the dragged element is dropped on the drop target
+function dragDrop() {
+  balloonReplaced = this.src;
+  balloonReplacedId = parseInt(this.id);
+  validMove();
+}
+
+// occurs when the user has finished dragging the element;
+// Define valid moves;
+function validMove() {
+  let validMoves = [
+    balloonDraggedId - 1,
+    balloonDraggedId - 10,
+    balloonDraggedId + 1,
+    balloonDraggedId + 10
+  ];
+  let validMove = validMoves.includes(balloonReplacedId);
+
+  if (balloonReplacedId && validMove) {
+    balloons[balloonReplacedId].src = balloonDragged;
+    balloons[balloonDraggedId].src = balloonReplaced;
+  } else if (balloonReplacedId && !validMove) {
+    balloons[balloonReplacedId].src = balloonReplaced;
+    balloons[balloonDraggedId].src = balloonDragged;
+  } else {
+    balloons[balloonDraggedId].src = balloonDragged;
+  }
+}
+
