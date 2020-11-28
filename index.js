@@ -115,23 +115,19 @@ function checkForRowMatching() {
   for (i = 0; i < 37; i++) {
     let matchingBalloon = balloonsArray[i].src;
     let possibleRowMatch = [
-      [i, i + 1, i + 2],
+      [i, i + 1, i + 2, i + 3, i + 4],
       [i, i + 1, i + 2, i + 3],
-      [i, i + 1, i + 2, i + 3, i + 4]
+      [i, i + 1, i + 2]
     ];
 
     // Do not check the last two balloons of each row for matching since we need at least three per row
     const notValid = [8, 9, 18, 19, 28, 29];
     if (notValid.includes(i)) continue;
 
-    if (possibleRowMatch[2].every(index => balloonsArray[index].src === matchingBalloon)) {
-      possibleRowMatch[2].forEach(index => balloonsArray[index].src = "");
-    }
-    else if (possibleRowMatch[1].every(index => balloonsArray[index].src === matchingBalloon)) {
-      possibleRowMatch[1].forEach(index => balloonsArray[index].src = "");
-    }
-    else if (possibleRowMatch[0].every(index => balloonsArray[index].src === matchingBalloon)) {
-      possibleRowMatch[0].forEach(index => balloonsArray[index].src = "");
+    for (let array of possibleRowMatch) {
+      if (array.every(index => balloonsArray[index].src === matchingBalloon)) {
+        array.forEach(index => balloonsArray[index].src = "");
+      }
     }
   }
 }
@@ -139,10 +135,10 @@ function checkForRowMatching() {
 function checkForColumnMatching() {
   for (i = 0; i < 20; i++) {
     let matchingBalloon = balloonsArray[i].src;
-    let possibleColumnMatch = [[i, i + rowWidth, i + rowWidth * 2]];
+    let possibleColumnMatch = [i, i + rowWidth, i + rowWidth * 2];
 
-    if (possibleColumnMatch[0].every(index => balloonsArray[index].src === matchingBalloon)) {
-      possibleColumnMatch[0].forEach(index => balloonsArray[index].src = "");
+    if (possibleColumnMatch.every(index => balloonsArray[index].src === matchingBalloon)) {
+      possibleColumnMatch.forEach(index => balloonsArray[index].src = "");
     }
   }
 }
