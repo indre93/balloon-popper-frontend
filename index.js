@@ -99,16 +99,19 @@ function validMove() {
     balloonDraggedId + rowWidth
   ];
   let validMove = validMoves.includes(balloonReplacedId);
+  let isBlank = balloonsArray[balloonReplacedId].currentSrc === "";
 
-  if (balloonReplacedId && validMove) {
+  if (balloonReplacedId && validMove && !isBlank) {
     balloonsArray[balloonReplacedId].src = balloonDragged;
     balloonsArray[balloonDraggedId].src = balloonReplaced;
   }
-  else if (balloonReplacedId && !validMove) {
+  else if (balloonReplacedId && !validMove && !isBlank) {
     balloonsArray[balloonReplacedId].src = balloonReplaced;
     balloonsArray[balloonDraggedId].src = balloonDragged;
+  } else {
+    isBlank;
+    balloonsArray[balloonDraggedId].src = balloonDragged;
   }
-  else balloonsArray[balloonDraggedId].src = balloonDragged;
 }
 
 function checkForRowMatching() {
