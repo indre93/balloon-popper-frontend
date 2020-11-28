@@ -123,11 +123,12 @@ function checkForRowMatching() {
       [i, i + 1, i + 2]
     ];
 
-    // Do not check the last two balloons of each row for matching since we need at least three per row
-    const notValid = [8, 9, 18, 19, 28, 29];
-    if (notValid.includes(i)) continue;
-
     for (let array of possibleRowMatch) {
+      let notValid;
+      (array === possibleRowMatch[2]) ? notValid = [8, 9, 18, 19, 28, 29] : (array === possibleRowMatch[1]) ?
+        notValid = [7, 8, 9, 17, 18, 19, 27, 28, 29] : notValid = [6, 7, 8, 9, 16, 17, 18, 19, 26, 27, 28, 29];
+
+      if (notValid.includes(i)) continue;
       if (array.every(index => balloonsArray[index].src === matchingBalloon)) {
         array.forEach(index => balloonsArray[index].src = "");
       }
