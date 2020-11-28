@@ -118,9 +118,9 @@ function checkForRowMatching() {
   for (i = 0; i < 37; i++) {
     let matchingBalloon = balloonsArray[i].src;
     let possibleRowMatch = [
-      [i, i + 1, i + 2, i + 3, i + 4],
-      [i, i + 1, i + 2, i + 3],
-      [i, i + 1, i + 2]
+      [i, i + 1, i + 2, i + 3, i + 4], // 5 mactching
+      [i, i + 1, i + 2, i + 3], // 4 matching
+      [i, i + 1, i + 2] // 3 matching
     ];
 
     for (let array of possibleRowMatch) {
