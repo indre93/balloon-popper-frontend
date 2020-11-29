@@ -13,8 +13,8 @@ let score = 0;
 document.addEventListener("DOMContentLoaded", () => {
   fetchAndLoadUsers();
   fetchAndLoadGames();
-  startTimer(twoMinutes);
   renderBalloons();
+  startGame();
 });
 
 function fetchAndLoadUsers() {
@@ -53,15 +53,14 @@ function getBalloonImages() {
 
 function pickRandomBalloon() {
   let balloons = getBalloonImages();
-  let balloon = balloons[Math.floor(Math.random() * balloons.length)];
-  gameContainer.append(balloon);
-  return balloon;
+  let randomBalloon = balloons[Math.floor(Math.random() * balloons.length)];
+  return randomBalloon;
 }
 
 function renderBalloons() {
   for (let i = 0; gameContainer.childElementCount < 40; i++) {
     balloon = pickRandomBalloon();
-    balloon.id = i;
+    gameContainer.append(balloon);
     balloonsArray.push(balloon);
   }
 
@@ -71,11 +70,6 @@ function renderBalloons() {
     balloon.addEventListener("dragover", (e) => { e.preventDefault(); });
     balloon.addEventListener("drop", dragDrop);
   });
-
-  setInterval(() => {
-    checkForRowMatching();
-    checkForColumnMatching();
-  }, 100);
 }
 
 // occurs when the user starts to drag an element
@@ -98,6 +92,7 @@ function validMove() {
     balloonDraggedId + 1,
     balloonDraggedId + rowWidth
   ];
+
   let validMove = validMoves.includes(balloonReplacedId);
   let isBlank = balloonsArray[balloonReplacedId].currentSrc === "";
 
@@ -108,9 +103,31 @@ function validMove() {
   else if (balloonReplacedId && !validMove && !isBlank) {
     balloonsArray[balloonReplacedId].src = balloonReplaced;
     balloonsArray[balloonDraggedId].src = balloonDragged;
-  } else {
+  }
+  else {
     isBlank;
     balloonsArray[balloonDraggedId].src = balloonDragged;
+  }
+}
+
+// Move balloons up if they have been cleared
+function moveBalloonsUp() {
+  for (i = 39; 9 < i; i--) {
+    if (balloonsArray[i - rowWidth].currentSrc === "") {
+      balloonsArray[i - rowWidth].src = balloonsArray[i].src;
+      balloonsArray[i].src = "";
+    }
+    checkAndFillEmptySpaces();
+  }
+}
+
+function checkAndFillEmptySpaces() {
+  const lastRow = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
+  const isLastRow = lastRow.includes(i);
+
+  if (isLastRow && (balloonsArray[i].currentSrc === "")) {
+    let randomBalloon = balloonsArray[Math.floor(Math.random() * balloonsArray.length)];
+    balloonsArray[i].src = randomBalloon.src;
   }
 }
 
@@ -130,6 +147,7 @@ function checkForRowMatching() {
 
       if (notValid.includes(i)) continue;
       if (array.every(index => balloonsArray[index].src === matchingBalloon)) {
+        updateScore();
         array.forEach(index => balloonsArray[index].src = "");
       }
     }
@@ -142,14 +160,25 @@ function checkForColumnMatching() {
     let possibleColumnMatch = [i, i + rowWidth, i + rowWidth * 2];
 
     if (possibleColumnMatch.every(index => balloonsArray[index].src === matchingBalloon)) {
+      updateScore();
       possibleColumnMatch.forEach(index => balloonsArray[index].src = "");
     }
   }
 }
 
+function startGame() {
+  startTimer(twoMinutes);
+  setInterval(() => {
+    setInterval(() => moveBalloonsUp(), 100);
+    checkForRowMatching();
+    checkForColumnMatching();
+  }, 500);
+}
+
 function updateScore() {
   let scoreCount = document.getElementById("score-count");
-  scoreCount.innerHTML = `<p>Score: ${(score = score + 10)}</p>`;
+  let scoreAmount = score = score + 10;
+  scoreCount.innerHTML = `<p>Score: ${(scoreAmount)}</p>`;
 }
 
 function startTimer(duration) {
