@@ -2,7 +2,7 @@ const BASE_URL = "http://localhost:3000";
 const gameContainer = document.getElementById("game-container");
 const colors = ["blue", "green", "orange", "purple", "red", "yellow"];
 const rowWidth = 10;
-let balloonsArray = Array.from(gameContainer.children);
+let balloonsArray = [];
 let balloonDragged;
 let balloonReplaced;
 let balloonDraggedId;
@@ -99,35 +99,12 @@ function validMove() {
   if (balloonReplacedId && validMove && !isBlank) {
     balloonsArray[balloonReplacedId].src = balloonDragged;
     balloonsArray[balloonDraggedId].src = balloonReplaced;
-  }
-  else if (balloonReplacedId && !validMove && !isBlank) {
+  } else if (balloonReplacedId && !validMove && !isBlank) {
     balloonsArray[balloonReplacedId].src = balloonReplaced;
     balloonsArray[balloonDraggedId].src = balloonDragged;
-  }
-  else {
+  } else {
     isBlank;
     balloonsArray[balloonDraggedId].src = balloonDragged;
-  }
-}
-
-// Move balloons up if they have been cleared
-function moveBalloonsUp() {
-  for (i = 39; 9 < i; i--) {
-    if (balloonsArray[i - rowWidth].currentSrc === "") {
-      balloonsArray[i - rowWidth].src = balloonsArray[i].src;
-      balloonsArray[i].src = "";
-    }
-    checkAndFillEmptySpaces();
-  }
-}
-
-function checkAndFillEmptySpaces() {
-  const lastRow = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
-  const isLastRow = lastRow.includes(i);
-
-  if (isLastRow && (balloonsArray[i].currentSrc === "")) {
-    let randomBalloon = balloonsArray[Math.floor(Math.random() * balloonsArray.length)];
-    balloonsArray[i].src = randomBalloon.src;
   }
 }
 
@@ -142,12 +119,23 @@ function checkForRowMatching() {
 
     for (let array of possibleRowMatch) {
       let notValid;
-      (array === possibleRowMatch[2]) ? notValid = [8, 9, 18, 19, 28, 29] : (array === possibleRowMatch[1]) ?
-        notValid = [7, 8, 9, 17, 18, 19, 27, 28, 29] : notValid = [6, 7, 8, 9, 16, 17, 18, 19, 26, 27, 28, 29];
+      let x = array;
+
+      switch (x) {
+        case possibleRowMatch[0]:
+          notValid = [6, 7, 8, 9, 16, 17, 18, 19, 26, 27, 28, 29];
+          break;
+        case possibleRowMatch[1]:
+          notValid = [7, 8, 9, 17, 18, 19, 27, 28, 29];
+          break;
+        case possibleRowMatch[2]:
+          notValid = [8, 9, 18, 19, 28, 29];
+          break;
+      }
 
       if (notValid.includes(i)) continue;
       if (array.every(index => balloonsArray[index].src === matchingBalloon)) {
-        updateScore();
+        updateScore(10);
         array.forEach(index => balloonsArray[index].src = "");
       }
     }
@@ -160,25 +148,31 @@ function checkForColumnMatching() {
     let possibleColumnMatch = [i, i + rowWidth, i + rowWidth * 2];
 
     if (possibleColumnMatch.every(index => balloonsArray[index].src === matchingBalloon)) {
-      updateScore();
-      possibleColumnMatch.forEach(index => balloonsArray[index].src = "");
+      updateScore(10);
+      possibleColumnMatch.forEach(index => { balloonsArray[index].src = ""; });
     }
   }
 }
 
-function startGame() {
-  startTimer(twoMinutes);
-  setInterval(() => {
-    setInterval(() => moveBalloonsUp(), 100);
-    checkForRowMatching();
-    checkForColumnMatching();
-  }, 500);
+function checkAndFillEmptySpaces(index) {
+  const lastRow = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
+  const isLastRow = lastRow.includes(index);
+
+  if (isLastRow && (balloonsArray[index].currentSrc === "")) {
+    let randomBalloon = pickRandomBalloon();
+    setTimeout(() => balloonsArray[index].src = randomBalloon.src, 200);
+  }
 }
 
-function updateScore() {
-  let scoreCount = document.getElementById("score-count");
-  let scoreAmount = score = score + 10;
-  scoreCount.innerHTML = `<p>Score: ${(scoreAmount)}</p>`;
+function moveBalloonsUp() {
+  for (i = 39; 9 < i; i--) {
+    if (balloonsArray[i - rowWidth].currentSrc === "") {
+      balloonsArray[i - rowWidth].src = balloonsArray[i].src;
+      balloonsArray[i].src = "";
+      checkAndFillEmptySpaces(i);
+    }
+    checkAndFillEmptySpaces(i);
+  }
 }
 
 function startTimer(duration) {
@@ -194,3 +188,18 @@ function startTimer(duration) {
     if (timer < 0) clearInterval(counter);
   }, 1000);
 };
+
+function updateScore(amount) {
+  let scoreCount = document.getElementById("score-count");
+  let scoreAmount = score += amount;
+  scoreCount.innerHTML = `<p>Score: ${(scoreAmount)}</p>`;
+}
+
+function startGame() {
+  startTimer(twoMinutes);
+  setInterval(() => {
+    moveBalloonsUp();
+    checkForRowMatching();
+    checkForColumnMatching();
+  }, 300);
+}
