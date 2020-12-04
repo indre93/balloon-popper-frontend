@@ -36,7 +36,6 @@ function fetchAndLoadGames() {
           game.id,
           game.user.username,
           game.score,
-          game.created_at
         );
         fetchedGame.renderTopGames();
       }

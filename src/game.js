@@ -1,15 +1,23 @@
 class Game {
-  constructor(id, username, score, created_at) {
+  constructor(id, username, score) {
     this.id = id;
     this.username = username;
     this.score = score;
-    this.created_at = created_at;
   }
 
-  get datePlayed() {
-    let formatDate = new Date(`${this.created_at}`);
-    let date = formatDate.toDateString();
-    return date;
+  ordinalNumber(num) {
+    return ["st", "nd", "rd"][((num + 90) % 100 - 10) % 10 - 1] || "th";
+  }
+
+  assignPositionNumber(tBody) {
+    const rows = Array.from(tBody.getElementsByTagName("tr"));
+
+    for (let i = 0; i < tBody.childElementCount; i++) {
+      rows.forEach(row => {
+        let position = row.sectionRowIndex + 1;
+        row.firstChild.innerHTML = position + this.ordinalNumber(position);
+      });
+    }
   }
 
   renderTopGames() {
@@ -25,9 +33,12 @@ class Game {
     }
 
     tr.insertAdjacentHTML('afterbegin',
-      `<td>${this.username}</td>
-      <td>${this.score}</td>
-      <td>${this.datePlayed}</td>`);
+      `<td></td>
+      <td>${this.username}</td>
+      <td>${this.score}</td>`
+    );
+
+    this.assignPositionNumber(tBody);
   }
 
 }
