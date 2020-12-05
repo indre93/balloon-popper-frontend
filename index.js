@@ -1,6 +1,8 @@
 const BASE_URL = "http://localhost:3000";
 const gameContainer = document.getElementById("game-container");
+const userForm = document.getElementById("new-user-container");
 const colors = ["blue", "green", "orange", "purple", "red", "yellow"];
+const popSound = new Audio("sounds/pop2.mp3");
 const rowWidth = 10;
 let balloonsArray = [];
 let balloonDragged;
@@ -135,7 +137,10 @@ function checkForRowMatching() {
       if (notValid.includes(i)) continue;
       if (array.every(index => balloonsArray[index].src === matchingBalloon)) {
         updateScore(10);
-        array.forEach(index => balloonsArray[index].src = "");
+        array.forEach(index => {
+          balloonsArray[index].src = "";
+          popSound.play();
+        });
       }
     }
   }
@@ -148,7 +153,10 @@ function checkForColumnMatching() {
 
     if (possibleColumnMatch.every(index => balloonsArray[index].src === matchingBalloon)) {
       updateScore(10);
-      possibleColumnMatch.forEach(index => { balloonsArray[index].src = ""; });
+      possibleColumnMatch.forEach(index => {
+        balloonsArray[index].src = "";
+        popSound.play();
+      });
     }
   }
 }
@@ -202,3 +210,12 @@ function startGame() {
     checkForColumnMatching();
   }, 300);
 }
+
+function newGame() {
+  window.addEventListener("DOMContentLoaded", (e) => {
+    if (e.type === "DOMContentLoaded") {
+      userForm.style.display = "block";
+    }
+  });
+}
+
