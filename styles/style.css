@@ -1,58 +1,86 @@
 * {
   box-sizing: border-box;
   color: white;
+  margin: 0;
+  height: 100%;
 }
 
 body {
   font-family: "Helvetica";
-  background: radial-gradient(circle,
-      rgb(228, 150, 105) 0%,
-      rgb(233, 112, 42) 89%,
-      rgb(214, 85, 10) 100%);
+  background: radial-gradient(circle, rgb(228, 150, 105) 0%, rgb(233, 112, 42) 89%, rgb(214, 85, 10) 100%);
+  color: white;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  align-content: center;
+  min-width: 950px;
 }
 
-#score-count p {
-  z-index: 1;
-  background-color: rgb(223, 181, 138);
-  border-style: inset;
-  padding: 5px;
-  width: auto;
-  height: auto;
-  top: 1%;
-  left: 35%;
-  font-size: 50px;
-  text-align: center;
-  position: fixed;
-  transform: translate(-50%, -50%);
+#game-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 700px;
+  height: 500px;
+  border-radius: 10px;
+  background-image: url(../images/final-night.png);
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
+  justify-self: center;
+  align-self: center;
+  margin: 10px
 }
 
-#timer p {
-  z-index: 1;
-  background-color: rgb(223, 181, 138);
-  border-style: inset;
-  padding: 5px;
-  width: auto;
+#game-container img {
+  padding: 3px;
+  width: 10%;
   height: auto;
-  top: 1%;
-  left: 69%;
-  font-size: 50px;
+}
+
+#current-game-info {
+  display: grid;
+  flex-wrap: nowrap;
+  background-color: rgba(109, 127, 151, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
   text-align: center;
-  position: fixed;
-  transform: translate(-50%, -50%);
+  padding: 30px;
+  margin: 10px;
+  justify-self: center;
+  align-self: center;
+  height: auto;
+  font-size: 45px;
+}
+
+#score-count {
+  margin-top: 75px;
+}
+
+#pause-button {
+  height: auto;
+  margin-top: 75px;
+  padding: 15px;
+  background-color: rgb(204, 110, 9);
+  border-color: rgb(231, 218, 183);
+  border-radius: 20px;
+  justify-self: center;
+  align-self: center;
+  font-size: medium;
+  outline: 0;
 }
 
 table {
   text-align: center;
-  position: fixed;
+  background-color: rgba(109, 127, 151, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
 }
 
 thead {
   background-image: url(../images/final-night.png);
 }
 
-table,
-td {
-  border: 1px solid rgb(27, 27, 27);
+table, td {
   list-style-position: inside;
 }
 
@@ -60,26 +88,80 @@ td {
   padding: 10px;
 }
 
-#game-container {
-  z-index: 2;
-  border: 2px solid;
-  border-style: inset;
-  background-image: url(../images/final-night.png);
-  background-position: center;
-  background-size: cover;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
   width: 700px;
   height: 500px;
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 100px;
 }
 
-#game-container img {
-  padding: 3px;
-  width: 10%;
+.new-user-form {
+  background-image: url(../images/night.png);
+  display: grid;
+  color: black;
+  background-color: #fefefe;
+  width: auto;
+  height: 300px;
+  border-radius: 15px;
+  padding: 50px;
+}
+
+.new-user-form label {
+  font-size: medium;
+  text-align: center;
+  font-size: 30px;
+}
+
+input {
+  margin-top: 18px;
   height: auto;
+  outline: none;
+  border-radius: 15px;
+  padding: 20px;
+  font-size: medium;
+  text-align: center;
+  display: inline-block;
+}
+
+button[type=submit] {
+  margin-top: 18px;
+  height: auto;
+  outline: none;
+  border-radius: 15px;
+  padding: 20px;
+  font-size: medium;
+  background-color: rgb(204, 110, 9);
+  border-color: rgb(231, 218, 183);
+}
+
+input[type=text]:focus {
+  color: black;
+  background-color: #ddd;
+  outline: none;
+}
+
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0)
+  }
+  to {
+    -webkit-transform: scale(1)
+  }
+}
+
+@keyframes animatezoom {
+  from {
+    transform: scale(0)
+  }
+  to {
+    transform: scale(1)
+  }
 }
