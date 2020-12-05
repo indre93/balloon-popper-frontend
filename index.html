@@ -6,36 +6,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Balloon Popper</title>
   <link rel="stylesheet" type="text/css" href="styles/style.css">
+  <link rel="shortcut icon" href="#" />
+
 </head>
 
 <body>
-  <!-- Current Score -->
-  <div id="score-count">
-    <p>Score: 0</p>
-  </div>
-
-  <!-- Gamer Timer -->
-  <div id="timer">
-    <p>02:00</p>
-  </div>
-
+  <!-- Game Content -->
   <div id="game-container">
-    <!-- Game Content -->
+
+    <!-- Enter Username Form -->
+    <div id="new-user-container" class="modal">
+      <form class="new-user-form animate">
+        <label>Username:</label>
+        <input type="text" placeholder="Enter Username" name="username" required>
+        <button type="submit">Start Game</button>
+      </form>
+    </div>
+
+  </div>
+
+  <div id="current-game-info">
+    <!-- Gamer Timer -->
+    <div id="timer">
+      <p>02:00</p>
+    </div>
+
+    <!-- Current Score -->
+    <div id="score-count">
+      <p>Score: 0</p>
+    </div>
+
+    <button id="pause-button">
+      <p>Pause</p>
+    </button>
   </div>
 
   <!-- Top Scores -->
-  <div id="top-scores">
+  <div hidden id="top-scores">
     <table>
       <thead>
         <tr>
           <th colspan="3">
-            <h1>Top 10 Scores</h1>
+            <h1>Top Scores</h1>
           </th>
         </tr>
         <tr>
+          <td>Position</td>
           <td>User</td>
           <td>Score</td>
-          <td>Date Played</td>
         </tr>
       </thead>
       <tbody id="table-body"></tbody>
