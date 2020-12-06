@@ -28,8 +28,7 @@ class Games {
 
     if (tBody.hasChildNodes()) {
       (tBody.firstChild.id < game.score) ? tBody.prepend(tr) : tBody.append(tr);
-    }
-    else tBody.prepend(tr);
+    } else tBody.prepend(tr);
 
     this.assignPositionNumber(tBody);
   }
