@@ -60,12 +60,12 @@ body {
   height: auto;
   margin-top: 75px;
   padding: 15px;
-  background-color: rgb(204, 110, 9);
+  background-color: rgb(181, 97, 8);
   border-color: rgb(231, 218, 183);
   border-radius: 20px;
   justify-self: center;
   align-self: center;
-  font-size: medium;
+  font-size: 20px;
   outline: 0;
 }
 
@@ -89,7 +89,7 @@ td {
 }
 
 .modal {
-  display: none;
+  display: block;
   position: fixed;
   z-index: 100;
   width: 700px;
@@ -106,34 +106,34 @@ td {
   width: auto;
   height: 300px;
   border-radius: 15px;
-  padding: 50px;
+  padding: 40px;
 }
 
 .new-user-form label {
-  font-size: medium;
   text-align: center;
-  font-size: 30px;
+  font-size: 25px;
+  justify-self: center;
+  align-self: center;
 }
 
-input {
-  margin-top: 18px;
+input#username {
   height: auto;
   outline: none;
   border-radius: 15px;
-  padding: 20px;
-  font-size: medium;
+  padding: 15px;
+  font-size: large;
   text-align: center;
   display: inline-block;
 }
 
-button[type=submit] {
-  margin-top: 18px;
+input#start-game-btn {
+  margin-top: 35px;
   height: auto;
   outline: none;
-  border-radius: 15px;
-  padding: 20px;
-  font-size: medium;
-  background-color: rgb(204, 110, 9);
+  border-radius: 20px;
+  padding: 15px;
+  font-size: 20px;
+  background-color: rgb(181, 97, 8);
   border-color: rgb(231, 218, 183);
 }
 
