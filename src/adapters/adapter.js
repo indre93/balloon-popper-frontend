@@ -13,19 +13,22 @@ const adapter = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user })
     })
-      .then(resp => resp.json());
+      .then(resp => resp.json())
+      .then(user => new User(user));
   },
 
-  createGame: (value) => {
+  createGame: (username, score) => {
     const game = {
-      username: value
+      username: username,
+      score: score
     };
     return fetch(`${BASE_URL}/games`, {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ game })
     })
-      .then(resp => resp.json());
+      .then(resp => resp.json())
+      .then(game => new Game(game));
   }
 
 };
