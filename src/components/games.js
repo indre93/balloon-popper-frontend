@@ -1,12 +1,11 @@
 class Games {
   constructor() {
     this.games = [];
-    this.adapter = new GamesAdapter();
     this.fetchAndLoadGames();
   }
 
   fetchAndLoadGames() {
-    this.adapter.getGames()
+    adapter.getGames()
       .then(games => {
         games.forEach(game => this.games.push(new Game(
           game.id,
@@ -16,12 +15,12 @@ class Games {
       })
       .then(() => {
         this.games.forEach(game => {
-          this.renderTopGames(game);
+          this.renderTopGamesBoard(game);
         });
       });
   }
 
-  renderTopGames(game) {
+  renderTopGamesBoard(game) {
     const tBody = document.getElementById("table-body");
     let tr = document.createElement("tr");
     tr.innerHTML = `<td></td><td>${game.username}</td><td>${game.score}</td>`;
