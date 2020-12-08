@@ -75,7 +75,7 @@ body {
 }
 
 .user-form-modal {
-  display: block;
+  display: none;
   position: fixed;
   z-index: 100;
   width: 700px;
@@ -229,7 +229,7 @@ table {
 
 .tableClass tbody::-webkit-scrollbar {
   border-radius: 15px;
-  width: 6px;
+  width: 7px;
   background-color: #F5F5F5;
 }
 
