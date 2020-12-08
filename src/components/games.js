@@ -14,7 +14,7 @@ class Games {
         )));
       })
       .then(() => {
-        this.games.forEach(game => {
+        this.sortedByScore().forEach(game => {
           this.renderTopGamesBoard(game);
         });
       });
@@ -24,17 +24,19 @@ class Games {
     const tBody = document.getElementById("table-body");
     let tr = document.createElement("tr");
     tr.innerHTML = `<td></td><td>${game.username}</td><td>${game.score}</td>`;
-
-    if (tBody.hasChildNodes()) {
-      (tBody.firstChild.id < game.score) ? tBody.prepend(tr) : tBody.append(tr);
-    } else tBody.prepend(tr);
-
+    tBody.append(tr);
     this.assignPositionNumber(tBody);
+  }
+
+  sortedByScore() {
+    let sortedGames = this.games.slice();
+    return sortedGames.sort((a, b) => b.score - a.score);
   }
 
   ordinalNumber(num) {
     return ["st", "nd", "rd"][((num + 90) % 100 - 10) % 10 - 1] || "th";
   }
+
 
   assignPositionNumber(tBody) {
     const rows = Array.from(tBody.getElementsByTagName("tr"));
