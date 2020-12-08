@@ -1,4 +1,6 @@
-const gameContainer = document.getElementById("game-container");
+const balloonsContainer = document.getElementById("balloons-container");
+const balloons = [];
+
 const balloonImages = [
   "images/balloons/blue.png",
   "images/balloons/green.png",
@@ -22,8 +24,9 @@ function pickRandomBalloon() {
 }
 
 function renderBalloons() {
-  for (let i = 0; gameContainer.childElementCount <= 40; i++) {
+  for (let i = 0; balloonsContainer.childElementCount < 40; i++) {
     let randomBalloon = this.pickRandomBalloon();
-    gameContainer.append(randomBalloon);
+    balloons.push(randomBalloon);
+    balloonsContainer.append(randomBalloon);
   }
 }
