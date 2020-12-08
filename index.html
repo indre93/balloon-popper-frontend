@@ -15,7 +15,7 @@
   <div id="game-container">
 
     <!-- Enter Username Form -->
-    <div id="new-user-container" class="modal">
+    <div id="new-user-container" class="user-form-modal">
       <form class="new-user-form animate">
         <label for="username">Username:</label>
         <input id="username" type="text" placeholder="Enter Username" name="username">
@@ -23,12 +23,32 @@
       </form>
     </div>
 
+    <!-- Top Scores -->
+    <div class="scoreboard-modal">
+      <div id="scoreboard-tableContainer">
+        <table class="tableClass">
+          <thead>
+            <tr>
+              <th colspan="3">
+                <h1>Top Scores</h1>
+              </th>
+            </tr>
+            <tr>
+              <td>Position</td>
+              <td>User</td>
+              <td>Score</td>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   <div id="current-game-info">
     <!-- Gamer Timer -->
     <div id="timer">
-      <p>02:00</p>
+      <span>02:00</span>
     </div>
 
     <!-- Current Score -->
@@ -39,25 +59,6 @@
     <button id="start-over-button">
       <p>Start Over</p>
     </button>
-  </div>
-
-  <!-- Top Scores -->
-  <div hidden id="top-scores">
-    <table>
-      <thead>
-        <tr>
-          <th colspan="3">
-            <h1>Top Scores</h1>
-          </th>
-        </tr>
-        <tr>
-          <td>Position</td>
-          <td>User</td>
-          <td>Score</td>
-        </tr>
-      </thead>
-      <tbody id="table-body"></tbody>
-    </table>
   </div>
 
   <!-- Scripts -->
