@@ -31,6 +31,11 @@ body {
   margin: 10px
 }
 
+#balloons-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 #game-container img {
   padding: 3px;
   width: 10%;
