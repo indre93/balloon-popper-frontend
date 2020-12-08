@@ -1,6 +1,8 @@
-const modal = document.querySelector("#game-container > .modal");
+const modalForm = document.querySelector("#game-container > .user-form-modal");
+const modalTable = document.querySelector("#game-container > .scoreboard-modal");
 const userForm = document.querySelector(".new-user-form");
 const userInput = document.querySelector("input#username");
+const scoreCount = document.getElementById("score-count");
 let games = new Games();
 let username;
 let score = 0;
@@ -10,10 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function getUsername() {
+  modalForm.style.display = "block";
   userForm.addEventListener("submit", (e) => {
     if (e.type === "submit") {
       e.preventDefault();
-      modal.style.display = "none";
+      modalForm.style.display = "none";
       username = userInput.value;
       // adapter.createUser(username);
       startNewGame();
@@ -22,6 +25,11 @@ function getUsername() {
 }
 
 function startNewGame() {
+  let game = new Game(
+    id = undefined,
+    username = username,
+    score = score
+  );
   game.start();
   startTimer(60 * 2);
 }
@@ -40,3 +48,7 @@ function startTimer(duration) {
   }, 1000);
 };
 
+function updateScore(amount) {
+  let scoreAmount = score += amount;
+  scoreCount.innerHTML = `<p>Score: ${(scoreAmount)}</p>`;
+}
