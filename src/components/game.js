@@ -5,53 +5,29 @@ class Game {
     this.score = score;
   }
 
+  get balloons() {
+    const balloons = Array.from(document.querySelectorAll("#game-container > img"));
+    return balloons;
+  }
+
   start() {
-    this.renderBalloons();
-    this.addEventListenersToBalloons();
+    renderBalloons();
+    this.addEventListenersToBalloons(this.balloons);
     setInterval(() => {
-      const balloons = Array.from(document.querySelectorAll("#game-container > img"));
-      this.moveBalloonsUp(balloons);
-      this.checkForFiveRowMatch(balloons);
-      this.checkForFourRowMatch(balloons);
-      this.checkForThreeRowMatch(balloons);
-      this.checkForFourColumnMatching(balloons);
-      this.checkForThreeColumnMatching(balloons);
+      this.moveBalloonsUp(this.balloons);
+      this.checkForMatchingBalloons(this.balloons);
     }, 300);
   }
 
-  getBalloonImages() {
-    const balloonImages = [
-      "images/balloons/blue.png",
-      "images/balloons/green.png",
-      "images/balloons/orange.png",
-      "images/balloons/purple.png",
-      "images/balloons/red.png",
-      "images/balloons/yellow.png"
-    ];
-
-    return balloonImages.map(balloonImg => {
-      const img = document.createElement("img");
-      img.src = balloonImg;
-      return img;
-    });
+  checkForMatchingBalloons(balloons) {
+    this.checkForFiveRowMatch(balloons);
+    this.checkForFourRowMatch(balloons);
+    this.checkForThreeRowMatch(balloons);
+    this.checkForFourColumnMatching(balloons);
+    this.checkForThreeColumnMatching(balloons);
   }
 
-  pickRandomBalloon() {
-    let balloons = this.getBalloonImages();
-    return balloons[Math.floor(Math.random() * balloons.length)];
-  }
-
-  renderBalloons() {
-    const gameContainer = document.getElementById("game-container");
-
-    for (let i = 0; gameContainer.childElementCount <= 40; i++) {
-      let randomBalloon = this.pickRandomBalloon();
-      gameContainer.append(randomBalloon);
-    }
-  }
-
-  addEventListenersToBalloons() {
-    const balloons = Array.from(document.querySelectorAll("#game-container > img"));
+  addEventListenersToBalloons(balloons) {
     let balloonDragged;
     let balloonReplaced;
     let balloonDraggedId;
@@ -175,20 +151,19 @@ class Game {
       if (balloons[i - 10].currentSrc === "") {
         balloons[i - 10].src = balloons[i].src;
         balloons[i].src = "";
-        this.checkAndFillEmptySpaces(i);
+        this.checkAndFillEmptySpaces(i, balloons);
       }
-      this.checkAndFillEmptySpaces(i);
+      this.checkAndFillEmptySpaces(i, balloons);
     }
   }
 
-  checkAndFillEmptySpaces(i) {
+  checkAndFillEmptySpaces(index, balloons) {
     const lastRow = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
-    const isLastRow = lastRow.includes(i);
+    const isLastRow = lastRow.includes(index);
 
-    const balloons = Array.from(document.querySelectorAll("#game-container > img"));
-    if (isLastRow && (balloons[i].currentSrc === "")) {
-      let randomBalloon = this.pickRandomBalloon();
-      setTimeout(() => balloons[i].src = randomBalloon.src, 200);
+    if (isLastRow && (balloons[index].currentSrc === "")) {
+      let randomBalloon = pickRandomBalloon();
+      setTimeout(() => balloons[index].src = randomBalloon.src, 200);
     }
   }
 
