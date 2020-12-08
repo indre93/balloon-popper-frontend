@@ -5,29 +5,24 @@ class Game {
     this.score = score;
   }
 
-  get balloons() {
-    const balloons = Array.from(document.querySelectorAll("#game-container > img"));
-    return balloons;
-  }
-
   start() {
     renderBalloons();
-    this.addEventListenersToBalloons(this.balloons);
+    this.addEventListenersToBalloons();
     setInterval(() => {
-      this.moveBalloonsUp(this.balloons);
-      this.checkForMatchingBalloons(this.balloons);
+      this.moveBalloonsUp();
+      this.checkForMatchingBalloons();
     }, 300);
   }
 
-  checkForMatchingBalloons(balloons) {
-    this.checkForFiveRowMatch(balloons);
-    this.checkForFourRowMatch(balloons);
-    this.checkForThreeRowMatch(balloons);
-    this.checkForFourColumnMatching(balloons);
-    this.checkForThreeColumnMatching(balloons);
+  checkForMatchingBalloons() {
+    this.checkForFiveRowMatch();
+    this.checkForFourRowMatch();
+    this.checkForThreeRowMatch();
+    this.checkForFourColumnMatching();
+    this.checkForThreeColumnMatching();
   }
 
-  addEventListenersToBalloons(balloons) {
+  addEventListenersToBalloons() {
     let balloonDragged;
     let balloonReplaced;
     let balloonDraggedId;
@@ -75,7 +70,7 @@ class Game {
     });
   }
 
-  checkForThreeRowMatch(balloons) {
+  checkForThreeRowMatch() {
     for (let i = 0; i <= 37; i++) {
       let matchingBalloon = balloons[i].src;
       let possibleRowMatch = [i, i + 1, i + 2];
@@ -90,7 +85,7 @@ class Game {
     }
   }
 
-  checkForFourRowMatch(balloons) {
+  checkForFourRowMatch() {
     for (let i = 0; i <= 36; i++) {
       let matchingBalloon = balloons[i].src;
       let possibleRowMatch = [i, i + 1, i + 2, i + 3];
@@ -98,14 +93,12 @@ class Game {
 
       if (notValid.includes(i)) continue;
       if (possibleRowMatch.every(index => balloons[index].src === matchingBalloon)) {
-        possibleRowMatch.forEach(index => {
-          balloons[index].src = "";
-        });
+        possibleRowMatch.forEach(index => balloons[index].src = "");
       }
     }
   }
 
-  checkForFiveRowMatch(balloons) {
+  checkForFiveRowMatch() {
     for (let i = 0; i <= 35; i++) {
       let matchingBalloon = balloons[i].src;
       let possibleRowMatch = [i, i + 1, i + 2, i + 3, i + 4];
@@ -113,40 +106,34 @@ class Game {
 
       if (notValid.includes(i)) continue;
       if (possibleRowMatch.every(index => balloons[index].src === matchingBalloon)) {
-        possibleRowMatch.forEach(index => {
-          balloons[index].src = "";
-        });
+        possibleRowMatch.forEach(index => balloons[index].src = "");
       }
     }
   }
 
-  checkForThreeColumnMatching(balloons) {
+  checkForThreeColumnMatching() {
     for (let i = 0; i <= 19; i++) {
       let matchingBalloon = balloons[i].src;
       let possibleColumnMatch = [i, i + 10, i + 10 * 2];
 
       if (possibleColumnMatch.every(index => balloons[index].src === matchingBalloon)) {
-        possibleColumnMatch.forEach(index => {
-          balloons[index].src = "";
-        });
+        possibleColumnMatch.forEach(index => balloons[index].src = "");
       }
     }
   }
 
-  checkForFourColumnMatching(balloons) {
+  checkForFourColumnMatching() {
     for (let i = 0; i <= 9; i++) {
       let matchingBalloon = balloons[i].src;
       let possibleColumnMatch = [i, i + 10, i + 10 * 2, i + 10 * 3];
 
       if (possibleColumnMatch.every(index => balloons[index].src === matchingBalloon)) {
-        possibleColumnMatch.forEach(index => {
-          balloons[index].src = "";
-        });
+        possibleColumnMatch.forEach(index => balloons[index].src = "");
       }
     }
   }
 
-  moveBalloonsUp(balloons) {
+  moveBalloonsUp() {
     for (let i = 39; 9 < i; i--) {
       if (balloons[i - 10].currentSrc === "") {
         balloons[i - 10].src = balloons[i].src;
@@ -157,7 +144,7 @@ class Game {
     }
   }
 
-  checkAndFillEmptySpaces(index, balloons) {
+  checkAndFillEmptySpaces(index) {
     const lastRow = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
     const isLastRow = lastRow.includes(index);
 
