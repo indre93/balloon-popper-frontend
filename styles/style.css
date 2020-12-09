@@ -3,10 +3,10 @@
   color: white;
   margin: 0;
   height: 100%;
+  font-family: "Do Hyeon", sans-serif;
 }
 
 body {
-  font-family: "Lucida Sans";
   background: radial-gradient(circle, rgb(228, 150, 105) 0%, rgb(233, 112, 42) 89%, rgb(214, 85, 10) 100%);
   color: white;
   display: grid;
@@ -36,7 +36,7 @@ body {
   flex-wrap: wrap;
 }
 
-#game-container img {
+#balloons-container img {
   padding: 3px;
   width: 10%;
   height: auto;
@@ -44,7 +44,7 @@ body {
 
 #current-game-info {
   display: grid;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   background-color: rgba(109, 127, 151, 0.5);
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
@@ -54,6 +54,7 @@ body {
   justify-self: center;
   align-self: center;
   height: auto;
+  width: 200px;
 }
 
 #timer {
@@ -62,7 +63,7 @@ body {
 
 #score-count {
   font-size: 45px;
-  margin-top: 75px;
+  margin-top: 50px;
 }
 
 #start-over-button {
@@ -124,7 +125,7 @@ input#start-game-btn {
   outline: none;
   border-radius: 20px;
   padding: 15px;
-  font-size: 20px;
+  font-size: 30px;
   background-color: rgb(181, 97, 8);
   border-color: rgba(182, 155, 120, 0.843);
 }
@@ -180,7 +181,6 @@ table {
   box-shadow: 0 2px 4px rgba(10, 10, 10, 0.639), inset 0 1px 0 rgba(255, 255, 255, 0.531);
   border-radius: 25px;
   padding: 10px;
-  font-family: "Lucida Sans";
   text-align: center;
 }
 
