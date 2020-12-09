@@ -11,7 +11,7 @@ class Game {
     setInterval(() => {
       this.moveBalloonsUp();
       this.checkForMatchingBalloons();
-    }, 300);
+    }, 250);
   }
 
   checkForMatchingBalloons() {
@@ -48,7 +48,6 @@ class Game {
         balloonDraggedId + 1,
         balloonDraggedId + 10,
       ];
-
       let validMove = validMoves.includes(balloonReplacedId);
 
       if ((balloonReplacedId || balloonReplacedId === 0) && validMove) {
@@ -78,9 +77,7 @@ class Game {
 
       if (notValid.includes(i)) continue;
       if (possibleRowMatch.every(index => balloons[index].src === matchingBalloon)) {
-        possibleRowMatch.forEach(index => {
-          balloons[index].src = "";
-        });
+        possibleRowMatch.forEach(index => balloons[index].src = "");
       }
     }
   }
@@ -138,9 +135,9 @@ class Game {
       if (balloons[i - 10].currentSrc === "") {
         balloons[i - 10].src = balloons[i].src;
         balloons[i].src = "";
-        this.checkAndFillEmptySpaces(i, balloons);
+        this.checkAndFillEmptySpaces(i);
       }
-      this.checkAndFillEmptySpaces(i, balloons);
+      this.checkAndFillEmptySpaces(i);
     }
   }
 
