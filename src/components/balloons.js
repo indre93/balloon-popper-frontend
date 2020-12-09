@@ -13,6 +13,8 @@ const balloonImages = [
 function getBalloonImages() {
   return balloonImages.map(balloonImg => {
     const img = document.createElement("img");
+    const color = balloonImg.match(/[\w\$]+/g)[2];
+    img.id = color + "-balloon";
     img.src = balloonImg;
     return img;
   });
