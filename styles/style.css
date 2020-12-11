@@ -10,15 +10,74 @@ body {
   background: radial-gradient(circle, rgb(228, 150, 105) 0%, rgb(233, 112, 42) 89%, rgb(214, 85, 10) 100%);
   color: white;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: repeat(3, auto);
   justify-content: center;
   align-content: center;
-  min-width: 950px;
+  min-width: 1065;
+}
+
+.header-class {
+  background-color: rgba(109, 127, 151, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
+  padding: 10px;
+  margin: 10px;
+  height: 75px;
+  width: auto;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+#game-header {
+  display: grid;
+  grid-template-columns: 200px 700px 200px;
+  justify-content: center;
+  align-content: center;
+}
+
+#current-level {
+  justify-self: flex-start;
+  align-self: start;
+}
+
+#player-name {
+  justify-self: center;
+  align-self: center;
+}
+
+#game-lives {
+  width: auto;
+  justify-self: flex-end;
+}
+
+.game-expectation {
+  background-color: rgba(109, 127, 151, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
+  padding: 10px;
+  margin: 10px;
+  height: auto;
+  width: 200px;
+}
+
+#balloon-expectations {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(6, 1fr);
+  justify-items: center;
+  align-items: center;
+  font-size: 40px;
+}
+
+#balloon-expectations span {
+  height: auto;
+}
+
+#balloon-expectations img, #balloon-expectation span, #arrow-img {
+  padding: 5px;
 }
 
 #game-container {
-  display: flex;
-  flex-wrap: wrap;
   width: 700px;
   height: 500px;
   border-radius: 10px;
@@ -26,23 +85,27 @@ body {
   background-position: center;
   background-size: cover;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
-  justify-self: center;
-  align-self: center;
-  margin: 10px
+  margin: 10px;
 }
 
-#balloons-container {
-  display: flex;
-  flex-wrap: wrap;
+.balloons-container {
+  display: grid;
+  grid-template-columns: repeat(10, auto);
+  grid-auto-rows: auto;
+  grid-auto-flow: row;
+  overflow: hidden;
 }
 
-#balloons-container img {
-  padding: 3px;
-  width: 10%;
+.balloons-container div {
   height: auto;
+  width: auto;
 }
 
-#current-game-info {
+.balloons-container img {
+  place-self: center;
+}
+
+.current-game-info {
   display: grid;
   flex-wrap: wrap;
   background-color: rgba(109, 127, 151, 0.5);
@@ -51,8 +114,6 @@ body {
   text-align: center;
   padding: 30px;
   margin: 10px;
-  justify-self: center;
-  align-self: center;
   height: auto;
   width: 200px;
 }
@@ -210,7 +271,7 @@ table {
 }
 
 .tableClass tbody td {
-  padding-left: 30px;
+  padding-left: 20px;
   padding-block: 10px;
   width: 500px;
 }
