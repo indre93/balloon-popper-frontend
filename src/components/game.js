@@ -7,6 +7,7 @@ class Game {
 
   start() {
     renderBalloons();
+    this.renderGameExpectation();
     this.addEventListenersToBalloons();
     setInterval(() => {
       this.moveBalloonsUp();
@@ -151,9 +152,17 @@ class Game {
     }
   }
 
-  SoundEffect() {
-    let popSound = new Audio("sounds/pop.mp3");
-    return popSound.play();
+  renderGameExpectation() {
+    const divExpectation = document.getElementById("balloon-expectations");
+
+    getBalloonImages(targetImages, 4).forEach(balloon => {
+      const arrowImg = document.createElement("img");
+      const span = document.createElement("span");
+      arrowImg.id = "arrow-img";
+      arrowImg.src = "images/arrow.png";
+      span.innerHTML = Math.floor(Math.random() * 10) + 3;
+      divExpectation.append(balloon, arrowImg, span);
+    });
   }
 
 }
