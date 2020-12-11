@@ -1,4 +1,4 @@
-const balloonsContainer = document.getElementById("balloons-container");
+const balloonsContainer = document.querySelector(".balloons-container");
 const balloons = [];
 
 const balloonImages = [
@@ -10,24 +10,38 @@ const balloonImages = [
   "images/balloons/yellow.png"
 ];
 
-function getBalloonImages() {
-  return balloonImages.map(balloonImg => {
+
+const balloonExpectationImgs = [
+  "images/balloons/target-balloons/blue.png",
+  "images/balloons/target-balloons/green.png",
+  "images/balloons/target-balloons/orange.png",
+  "images/balloons/target-balloons/purple.png",
+  "images/balloons/target-balloons/red.png",
+  "images/balloons/target-balloons/yellow.png"
+];
+
+function getBalloonImages(images, index) {
+  return images.map(balloonImg => {
     const img = document.createElement("img");
-    const color = balloonImg.match(/[\w\$]+/g)[2];
+    const color = getBalloonColor(balloonImg, index);
     img.id = color + "-balloon";
     img.src = balloonImg;
     return img;
   });
 }
 
+function getBalloonColor(img, index) {
+  return img.match(/[\w\$]+/g)[index];
+}
+
 function pickRandomBalloon() {
-  let balloons = this.getBalloonImages();
+  let balloons = getBalloonImages(balloonImages, 2);
   return balloons[Math.floor(Math.random() * balloons.length)];
 }
 
 function renderBalloons() {
   for (let i = 0; balloonsContainer.childElementCount < 40; i++) {
-    let randomBalloon = this.pickRandomBalloon();
+    let randomBalloon = pickRandomBalloon();
     balloons.push(randomBalloon);
     balloonsContainer.append(randomBalloon);
   }

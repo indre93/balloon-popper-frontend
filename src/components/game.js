@@ -6,7 +6,7 @@ class Game {
   }
 
   start() {
-    renderBalloons();
+    renderBalloons(balloonImages, 2);
     this.renderGameExpectation();
     this.addEventListenersToBalloons();
     setInterval(() => {
@@ -155,7 +155,7 @@ class Game {
   renderGameExpectation() {
     const divExpectation = document.getElementById("balloon-expectations");
 
-    getBalloonImages(targetImages, 4).forEach(balloon => {
+    getBalloonImages(balloonExpectationImgs, 4).forEach(balloon => {
       const arrowImg = document.createElement("img");
       const span = document.createElement("span");
       arrowImg.id = "arrow-img";
