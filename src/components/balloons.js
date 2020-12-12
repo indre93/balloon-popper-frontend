@@ -1,5 +1,9 @@
 const balloonsContainer = document.querySelector(".balloons-container");
 const balloons = [];
+let balloonDragged;
+let balloonReplaced;
+let balloonDraggedId;
+let balloonReplacedId;
 
 const balloonImages = [
   "images/balloons/blue.png",
@@ -46,3 +50,46 @@ function renderBalloons() {
     balloonsContainer.append(randomBalloon);
   }
 }
+
+function addEventListenersToBalloons() {
+  balloons.forEach((balloon) => {
+    balloon.addEventListener("dragstart", dragStart);
+    balloon.addEventListener("dragenter", (e) => { e.preventDefault(); });
+    balloon.addEventListener("dragover", (e) => { e.preventDefault(); });
+    balloon.addEventListener("drop", dragDrop);
+  });
+}
+
+// occurs when the user starts to drag an element
+let dragStart = (e) => {
+  balloonDragged = e.target.src;
+  balloonDraggedId = balloons.indexOf(e.target);
+};
+
+// occurs when the dragged element is dropped on the drop target
+let dragDrop = (e) => {
+  e.preventDefault();
+  balloonReplaced = e.target.src;
+  balloonReplacedId = balloons.indexOf(e.target);
+  validMove();
+};
+
+let validMove = () => {
+  let validMoves = [
+    balloonDraggedId - 10,
+    balloonDraggedId - 1,
+    balloonDraggedId + 1,
+    balloonDraggedId + 10,
+  ];
+  let validMove = validMoves.includes(balloonReplacedId);
+
+  if ((balloonReplacedId || balloonReplacedId === 0) && validMove) {
+    balloons[balloonReplacedId].src = balloonDragged;
+    balloons[balloonDraggedId].src = balloonReplaced;
+  } else if (balloonReplacedId && !validMove) {
+    balloons[balloonReplacedId].src = balloonReplaced;
+    balloons[balloonDraggedId].src = balloonDragged;
+  } else {
+    balloons[balloonDraggedId].src = balloonDragged;
+  }
+};
