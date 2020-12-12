@@ -21,10 +21,33 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function renderWelcome() {
+  renderLogo();
   playerName.innerHTML = "<h1>Welcome to the Balloon Popper Game!</h1>";
   modalForm.style.display = "block";
   balloonContainer.style.display = "none";
   getUsername();
+}
+
+function renderLogo() {
+  const logo = document.createElement("img");
+  logo.src = "images/balloons-logo.png";
+  logo.id = "logo";
+  gameExpectationDiv.prepend(logo);
+  movingLogo(logo);
+}
+
+function movingLogo(img) {
+  let pos = 490;
+  let id = setInterval(frame, 15);
+  function frame() {
+    if (pos == -180) {
+      clearInterval(id);
+      renderLogo();
+    } else {
+      pos--;
+      img.style.top = pos + 'px';
+    }
+  }
 }
 
 function getUsername() {
