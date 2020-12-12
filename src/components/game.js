@@ -5,7 +5,7 @@ class Game {
     this.score = score;
   }
 
-  start() {
+  begin() {
     addEventListenersToBalloons();
     this.checkForMatchingBalloons();
     this.updateGame();
@@ -87,7 +87,7 @@ class Game {
 
   popBalloon(possibleMatch, matchingBalloon) {
     if (possibleMatch.every(index => balloons[index].src === matchingBalloon.src)) {
-      SoundEffect();
+      popSound.play();
       possibleMatch.forEach(index => {
         balloons[index].src = "images/balloons/pop.png";
         balloons[index].setAttribute("popped", "true");
