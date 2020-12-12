@@ -72,10 +72,18 @@ let newGame = {
     renderGameHeader();
     renderGameExpectation();
     startTimer(60 * 2);
+    newGame.startOver();
   },
   startOver: () => {
-
+    startOverBtn.addEventListener("click", (e) => {
+      if (e.type === "click") {
+        username = "";
+        score = 0;
+        renderWelcome();
+      }
+    });
   }
+
 };
 
 function renderGameHeader() {
