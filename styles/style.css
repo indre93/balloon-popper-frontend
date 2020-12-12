@@ -13,7 +13,6 @@ body {
   grid-template-columns: repeat(3, auto);
   justify-content: center;
   align-content: center;
-  min-width: 1065;
 }
 
 .header-class {
@@ -65,7 +64,6 @@ body {
   width: 180px;
   height: auto;
   position: absolute;
-  top: 490px;
 }
 
 #balloon-expectations {
@@ -153,7 +151,7 @@ body {
 
 .user-form-modal {
   display: none;
-  position: fixed;
+  position: absolute;
   z-index: 100;
   width: 700px;
   height: 500px;
@@ -232,7 +230,7 @@ input[type=text]:focus {
 
 .scoreboard-modal {
   display: none;
-  position: fixed;
+  position: absolute;
   border-radius: 10px;
   z-index: 100;
   width: 700px;
