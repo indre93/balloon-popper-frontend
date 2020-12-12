@@ -10,7 +10,6 @@ const balloonImages = [
   "images/balloons/yellow.png"
 ];
 
-
 const balloonExpectationImgs = [
   "images/balloons/target-balloons/blue.png",
   "images/balloons/target-balloons/green.png",
@@ -20,11 +19,12 @@ const balloonExpectationImgs = [
   "images/balloons/target-balloons/yellow.png"
 ];
 
-function getBalloonImages(images, index) {
+function getBalloonImages(images, index, popped = false) {
   return images.map(balloonImg => {
     const img = document.createElement("img");
     const color = getBalloonColor(balloonImg, index);
     img.id = color + "-balloon";
+    img.setAttribute("popped", popped);
     img.src = balloonImg;
     return img;
   });
