@@ -57,6 +57,15 @@ body {
   margin: 10px;
   height: auto;
   width: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+#logo {
+  width: 180px;
+  height: auto;
+  position: absolute;
+  top: 490px;
 }
 
 #balloon-expectations {
