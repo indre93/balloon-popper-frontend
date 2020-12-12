@@ -37,15 +37,15 @@ function renderLogo() {
 }
 
 function movingLogo(img) {
-  let pos = 490;
-  let id = setInterval(frame, 15);
+  let pos = 500;
+  let id = setInterval(frame, 20);
   function frame() {
-    if (pos == -180) {
+    if (pos == -190) {
       clearInterval(id);
-      renderLogo();
+      img.style.top = "150px";
     } else {
       pos--;
-      img.style.top = pos + 'px';
+      img.style.top = pos + "px";
     }
   }
 }
@@ -83,7 +83,6 @@ let newGame = {
       }
     });
   }
-
 };
 
 function renderGameHeader() {
