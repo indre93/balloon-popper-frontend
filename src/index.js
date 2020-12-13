@@ -65,25 +65,13 @@ function getUsername() {
   });
 }
 
-let newGame = {
-  start: () => {
-    let game = new Game();
-    game.begin();
-    renderGameHeader();
-    renderGameExpectation();
-    startTimer(duration);
-    newGame.startOver();
-  },
-  startOver: () => {
-    startOverBtn.addEventListener("click", (e) => {
-      if (e.type === "click") {
-        username = "";
-        score = 0;
-        renderWelcome();
-      }
-    });
-  }
-};
+function startNewGame() {
+  game.begin();
+  renderGameHeader();
+  renderGameExpectation();
+  startTimer(duration);
+  startOver();
+}
 
 function renderGameHeader() {
   currentLevelDiv.innerHTML = "<h2>Level 1</h2>";
