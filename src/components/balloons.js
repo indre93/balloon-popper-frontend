@@ -1,4 +1,3 @@
-const balloonsContainer = document.querySelector(".balloons-container");
 const balloons = [];
 let lastBalloon;
 let balloonDragged;
