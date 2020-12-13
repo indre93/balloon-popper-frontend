@@ -3,17 +3,18 @@ const modalTable = document.querySelector(".scoreboard-modal");
 const userForm = document.querySelector(".new-user-form");
 const userInput = document.querySelector("input#username");
 const gameHeader = document.querySelector("#game-header");
-const currentLevelDiv = document.querySelector("#current-level");
+const currentLevel = document.querySelector("#current-level");
 const playerName = document.querySelector("#player-name");
 const gameLives = document.querySelector("#game-lives");
-const gameExpectationDiv = document.querySelector(".game-expectation");
-const balloonExpectationDiv = document.querySelector("#balloon-expectations");
-const balloonContainer = document.querySelector(".balloons-container");
+const gameExpectation = document.querySelector(".game-expectation");
+const balloonExpectations = document.querySelector("#balloon-expectations");
+const balloonsContainer = document.querySelector(".balloons-container");
 const countdown = document.querySelector("#timer");
 const scoreCount = document.querySelector("#score-count");
 const startOverBtn = document.querySelector("button#start-over-button");
 const popSound = new Audio("sounds/pop.mp3");
 let games = new Games();
+let game = new Game();
 let duration = 60 * 2;
 let username;
 let score = 0;
@@ -27,7 +28,7 @@ function renderWelcome() {
   renderLogo();
   playerName.innerHTML = "<h1>Welcome to the Balloon Popper Game!</h1>";
   modalForm.style.display = "block";
-  balloonContainer.style.display = "none";
+  balloonsContainer.style.display = "none";
   getUsername();
 }
 
@@ -35,7 +36,7 @@ function renderLogo() {
   const logo = document.createElement("img");
   logo.src = "images/balloons-logo.png";
   logo.id = "logo";
-  gameExpectationDiv.prepend(logo);
+  gameExpectation.prepend(logo);
   movingLogo(logo);
 }
 
@@ -57,11 +58,11 @@ function getUsername() {
     if (e.type === "submit") {
       e.preventDefault();
       modalForm.style.display = "none";
-      balloonContainer.style.display = "grid";
-      gameExpectationDiv.firstElementChild.remove();
+      balloonsContainer.style.display = "grid";
+      gameExpectation.firstElementChild.remove();
       username = userInput.value;
       // adapter.createUser(username);
-      newGame.start();
+      startNewGame();
     }
   });
 }
@@ -75,10 +76,10 @@ function startNewGame() {
 }
 
 function renderGameHeader() {
-  currentLevelDiv.innerHTML = "<h2>Level 1</h2>";
+  currentLevel.innerHTML = "<h2>Level 1</h2>";
   playerName.innerHTML = `<h1>Hi!, ${username}</h1>`;
   gameLives.innerHTML = "<h2>Lives: 3</h2>";
-  gameHeader.append(currentLevelDiv, playerName, gameLives);
+  gameHeader.append(currentLevel, playerName, gameLives);
 }
 
 function renderGameExpectation() {
@@ -88,7 +89,7 @@ function renderGameExpectation() {
     arrowImg.id = "arrow-img";
     arrowImg.src = "images/arrow.png";
     span.innerHTML = Math.floor(Math.random() * 10) + 3;
-    balloonExpectationDiv.append(balloon, arrowImg, span);
+    balloonExpectations.append(balloon, arrowImg, span);
   });
 }
 
