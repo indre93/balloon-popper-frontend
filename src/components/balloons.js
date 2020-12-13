@@ -1,5 +1,6 @@
 const balloonsContainer = document.querySelector(".balloons-container");
 const balloons = [];
+let lastBalloon;
 let balloonDragged;
 let balloonReplaced;
 let balloonDraggedId;
@@ -39,8 +40,22 @@ function getBalloonColor(img, index) {
 }
 
 function pickRandomBalloon() {
-  let balloons = getBalloonImages(balloonImages, 2);
-  return balloons[Math.floor(Math.random() * balloons.length)];
+  const balloons = getBalloonImages(balloonImages, 2);
+  const randIndex = Math.floor(Math.random() * balloons.length);
+  const balloon = balloons[randIndex];
+
+  if (0 < balloonsContainer.childElementCount) {
+    if (balloon.id === lastBalloon.id) return pickRandomBalloon();
+  }
+
+  if (9 < balloonsContainer.childElementCount) {
+    const array = Array.from(balloonsContainer.childNodes);
+    const num = array.indexOf(lastBalloon) + 1;
+    if (balloon.id === array[num - 10].id) return pickRandomBalloon();
+  }
+
+  lastBalloon = balloon;
+  return balloon;
 }
 
 function renderBalloons() {
