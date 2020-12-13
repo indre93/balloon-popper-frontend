@@ -84,27 +84,30 @@ function renderGameHeader() {
 }
 
 function renderGameExpectation() {
-  getBalloonImages(balloonExpectationImgs, 4, null).forEach(balloon => {
+  getBalloonImages(balloonExpectationImgs, 4).forEach(balloon => {
     const arrowImg = document.createElement("img");
     const span = document.createElement("span");
     span.id = balloon.id;
     arrowImg.id = "arrow-img";
     arrowImg.src = "images/arrow.png";
-    span.innerHTML = Math.floor(Math.random() * 10) + 3;
+    span.innerHTML = Math.floor(Math.random() * 7) + 1;
     balloonExpectations.append(balloon, arrowImg, span);
   });
 }
 
-function updateTargetNum(poppedBalloon, number) {
+function updateGameTarget(balloon) {
   const array = Array.from(balloonTargetNum);
-  const targetElem = array.find(elem => elem.id === poppedBalloon);
-  targetElem.innerHTML -= number;
+  const targetElem = array.find(elem => elem.id === balloon.id);
+  const checkImg = document.createElement("img");
+  checkImg.src = "images/check.png";
 
-  if (targetElem.innerHTML <= 0) {
-    const checkImg = document.createElement("img");
-    checkImg.src = "images/check.png";
-    targetElem.replaceWith(checkImg);
-  }
+  let interval = setInterval(() => {
+    if (0 < targetElem.innerHTML) {
+      targetElem.innerHTML -= 1;
+      if (targetElem.innerHTML <= 0) targetElem.replaceWith(checkImg);
+      clearInterval(interval);
+    }
+  }, 0);
 }
 
 function startTimer(duration) {
