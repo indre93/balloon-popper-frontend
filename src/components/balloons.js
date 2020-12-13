@@ -49,6 +49,7 @@ function renderBalloons() {
     balloons.push(randomBalloon);
     balloonsContainer.append(randomBalloon);
   }
+  addEventListenersToBalloons();
 }
 
 function addEventListenersToBalloons() {
