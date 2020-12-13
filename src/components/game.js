@@ -6,25 +6,26 @@ class Game {
   }
 
   begin() {
-    addEventListenersToBalloons();
+    renderBalloons(balloonImages, 2, false);
     this.checkForMatchingBalloons();
-    this.updateGame();
+    this.updateAction();
   }
 
-  updateGame() {
+  updateAction() {
     setInterval(() => {
       if (balloons.every(balloon => balloon.getAttribute("popped") === "false")) {
         this.checkForMatchingBalloons();
       } else {
         balloons.forEach(balloon => {
-          if (balloon.getAttribute('popped') === "true") {
+          if (balloon.getAttribute("popped") === "true") {
+            updateGameTarget(balloon);
             scoreCount.innerHTML = `<p>Score: ${(score += 10)}</p>`;
             balloon.setAttribute("popped", "null");
             balloon.src = "";
           }
         });
       }
-    }, 150);
+    }, 100);
   }
 
   moveBalloonsUp() {
@@ -33,6 +34,16 @@ class Game {
         balloons[i - 10].src = balloons[i].src;
         balloons[i].src = "";
       }
+    }
+  }
+
+  popBalloon(matchingArray, matchingBalloon) {
+    if (matchingArray.every(index => balloons[index].src === matchingBalloon.src)) {
+      matchingArray.forEach(index => {
+        popSound.play();
+        balloons[index].src = "images/balloons/pop.png";
+        balloons[index].setAttribute("popped", "true");
+      });
     }
   }
 
@@ -82,16 +93,6 @@ class Game {
     for (let i = 0; i <= 9; i++) {
       let possibleMatch = [i, i + 10, i + 10 * 2, i + 10 * 3];
       this.popBalloon(possibleMatch, balloons[i]);
-    }
-  }
-
-  popBalloon(possibleMatch, matchingBalloon) {
-    if (possibleMatch.every(index => balloons[index].src === matchingBalloon.src)) {
-      popSound.play();
-      possibleMatch.forEach(index => {
-        balloons[index].src = "images/balloons/pop.png";
-        balloons[index].setAttribute("popped", "true");
-      });
     }
   }
 
