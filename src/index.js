@@ -8,6 +8,7 @@ const playerName = document.querySelector("#player-name");
 const gameLives = document.querySelector("#game-lives");
 const gameExpectation = document.querySelector(".game-expectation");
 const balloonExpectations = document.querySelector("#balloon-expectations");
+const balloonTargetNum = balloonExpectations.getElementsByTagName("span");
 const balloonsContainer = document.querySelector(".balloons-container");
 const countdown = document.querySelector("#timer");
 const scoreCount = document.querySelector("#score-count");
@@ -86,11 +87,24 @@ function renderGameExpectation() {
   getBalloonImages(balloonExpectationImgs, 4, null).forEach(balloon => {
     const arrowImg = document.createElement("img");
     const span = document.createElement("span");
+    span.id = balloon.id;
     arrowImg.id = "arrow-img";
     arrowImg.src = "images/arrow.png";
     span.innerHTML = Math.floor(Math.random() * 10) + 3;
     balloonExpectations.append(balloon, arrowImg, span);
   });
+}
+
+function updateTargetNum(poppedBalloon, number) {
+  const array = Array.from(balloonTargetNum);
+  const targetElem = array.find(elem => elem.id === poppedBalloon);
+  targetElem.innerHTML -= number;
+
+  if (targetElem.innerHTML <= 0) {
+    const checkImg = document.createElement("img");
+    checkImg.src = "images/check.png";
+    targetElem.replaceWith(checkImg);
+  }
 }
 
 function startTimer(duration) {
@@ -104,7 +118,7 @@ function startTimer(duration) {
     --timer;
     if (timer < 0) {
       clearInterval(counter);
-      gameOver();
+      // gameOver();
     }
   }, 1000);
 };
