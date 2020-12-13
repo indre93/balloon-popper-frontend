@@ -41,7 +41,7 @@ class Game {
     if (matchingArray.every(index => balloons[index].src === matchingBalloon.src)) {
       matchingArray.forEach(index => {
         popSound.play();
-        balloons[index].src = "images/balloons/pop.png";
+        balloons[index].src = "images/pop.png";
         balloons[index].setAttribute("popped", "true");
       });
     }
