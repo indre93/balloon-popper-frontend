@@ -108,6 +108,23 @@ function startTimer(duration) {
   }, 1000);
 };
 
+function startOver() {
+  startOverBtn.addEventListener("click", (e) => {
+    if (e.type === "click") {
+      game = "";
+      currentLevel.innerHTML = "";
+      gameLives.innerHTML = "";
+      balloonsContainer.innerHTML = "";
+      balloonExpectations.innerHTML = "";
+      username = "";
+      playerName.innerHTML = "<h1>Welcome to the Balloon Popper Game!</h1>";
+      scoreCount.innerHTML = "<p>Score: 0</p>";
+      countdown.innerHTML = "<span>00:00</span>";
+      renderWelcome();
+    }
+  });
+}
+
 function gameOver() {
   timeUp = true;
   balloonsContainer.style.display = "none";
