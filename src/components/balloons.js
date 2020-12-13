@@ -2,8 +2,10 @@ const balloons = [];
 let lastBalloon;
 let balloonDragged;
 let balloonReplaced;
-let balloonDraggedId;
-let balloonReplacedId;
+let balloonDraggedColorId;
+let balloonReplacedColorId;
+let balloonDraggedIndex;
+let balloonReplacedIndex;
 
 const balloonImages = [
   "images/balloons/blue.png",
@@ -78,33 +80,37 @@ function addEventListenersToBalloons() {
 // occurs when the user starts to drag an element
 let dragStart = (e) => {
   balloonDragged = e.target.src;
-  balloonDraggedId = balloons.indexOf(e.target);
+  balloonDraggedColorId = e.target.id;
+  balloonDraggedIndex = balloons.indexOf(e.target);
 };
 
 // occurs when the dragged element is dropped on the drop target
 let dragDrop = (e) => {
   e.preventDefault();
   balloonReplaced = e.target.src;
-  balloonReplacedId = balloons.indexOf(e.target);
+  balloonReplacedColorId = e.target.id;
+  balloonReplacedIndex = balloons.indexOf(e.target);
   validMove();
 };
 
 let validMove = () => {
   let validMoves = [
-    balloonDraggedId - 10,
-    balloonDraggedId - 1,
-    balloonDraggedId + 1,
-    balloonDraggedId + 10,
+    balloonDraggedIndex - 10,
+    balloonDraggedIndex - 1,
+    balloonDraggedIndex + 1,
+    balloonDraggedIndex + 10,
   ];
-  let validMove = validMoves.includes(balloonReplacedId);
+  let validMove = validMoves.includes(balloonReplacedIndex);
 
-  if ((balloonReplacedId || balloonReplacedId === 0) && validMove) {
-    balloons[balloonReplacedId].src = balloonDragged;
-    balloons[balloonDraggedId].src = balloonReplaced;
-  } else if (balloonReplacedId && !validMove) {
-    balloons[balloonReplacedId].src = balloonReplaced;
-    balloons[balloonDraggedId].src = balloonDragged;
+  if ((balloonReplacedIndex || balloonReplacedIndex === 0) && validMove) {
+    balloons[balloonReplacedIndex].src = balloonDragged;
+    balloons[balloonDraggedIndex].src = balloonReplaced;
+    balloons[balloonReplacedIndex].id = balloonDraggedColorId;
+    balloons[balloonDraggedIndex].id = balloonReplacedColorId;
+  } else if (balloonReplacedIndex && !validMove) {
+    balloons[balloonReplacedIndex].src = balloonReplaced;
+    balloons[balloonDraggedIndex].src = balloonDragged;
   } else {
-    balloons[balloonDraggedId].src = balloonDragged;
+    balloons[balloonDraggedIndex].src = balloonDragged;
   }
 };
