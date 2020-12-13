@@ -17,6 +17,7 @@ let games = new Games();
 let duration = 60 * 2;
 let username;
 let score = 0;
+let timeUp = false;
 
 document.addEventListener("DOMContentLoaded", () => {
   renderWelcome();
@@ -100,6 +101,15 @@ function startTimer(duration) {
     seconds = seconds < 10 ? "0" + seconds : seconds;
     countdown.innerHTML = `<p>${minutes}:${seconds}</p>`;
     --timer;
-    if (timer < 0) clearInterval(counter);
+    if (timer < 0) {
+      clearInterval(counter);
+      gameOver();
+    }
   }, 1000);
 };
+
+function gameOver() {
+  timeUp = true;
+  balloonsContainer.style.display = "none";
+  modalTable.style.display = "block";
+}
