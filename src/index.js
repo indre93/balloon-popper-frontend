@@ -1,18 +1,20 @@
-const modalForm = document.querySelector("#game-container > .user-form-modal");
-const modalTable = document.querySelector("#game-container > .scoreboard-modal");
+const modalForm = document.querySelector(".user-form-modal");
+const modalTable = document.querySelector(".scoreboard-modal");
 const userForm = document.querySelector(".new-user-form");
 const userInput = document.querySelector("input#username");
-const gameHeader = document.querySelector(".header-class > #game-header");
-const currentLevelDiv = document.querySelector("#game-header > #current-level");
-const playerName = document.querySelector("#game-header > #player-name");
-const gameLives = document.querySelector("#game-header > #game-lives");
+const gameHeader = document.querySelector("#game-header");
+const currentLevelDiv = document.querySelector("#current-level");
+const playerName = document.querySelector("#player-name");
+const gameLives = document.querySelector("#game-lives");
 const gameExpectationDiv = document.querySelector(".game-expectation");
-const balloonExpectationDiv = document.querySelector(".game-expectation > #balloon-expectations");
-const balloonContainer = document.querySelector("#game-container > .balloons-container");
-const scoreCount = document.querySelector(".current-game-info > #score-count");
+const balloonExpectationDiv = document.querySelector("#balloon-expectations");
+const balloonContainer = document.querySelector(".balloons-container");
+const countdown = document.querySelector("#timer");
+const scoreCount = document.querySelector("#score-count");
 const startOverBtn = document.querySelector("button#start-over-button");
 const popSound = new Audio("sounds/pop.mp3");
 let games = new Games();
+let duration = 60 * 2;
 let username;
 let score = 0;
 
@@ -40,9 +42,8 @@ function movingLogo(img) {
   let pos = 500;
   let id = setInterval(frame, 20);
   function frame() {
-    if (pos == -190) {
+    if (pos == 150) {
       clearInterval(id);
-      img.style.top = "150px";
     } else {
       pos--;
       img.style.top = pos + "px";
@@ -67,11 +68,10 @@ function getUsername() {
 let newGame = {
   start: () => {
     let game = new Game();
-    renderBalloons(balloonImages, 2, false);
     game.begin();
     renderGameHeader();
     renderGameExpectation();
-    startTimer(60 * 2);
+    startTimer(duration);
     newGame.startOver();
   },
   startOver: () => {
@@ -104,7 +104,6 @@ function renderGameExpectation() {
 }
 
 function startTimer(duration) {
-  let countdown = document.getElementById("timer");
   let timer = duration, minutes, seconds;
   let counter = setInterval(() => {
     minutes = parseInt(timer / 60, 10);
