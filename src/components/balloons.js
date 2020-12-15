@@ -1,4 +1,6 @@
 const balloons = [];
+const columnNum = 12;
+const rowNum = 5;
 let lastBalloon;
 let balloonDragged;
 let balloonReplaced;
@@ -47,19 +49,17 @@ function pickRandomBalloon() {
   if (0 < balloonsContainer.childElementCount) {
     if (randomBalloon.id === lastBalloon.id) return pickRandomBalloon();
   }
-
-  if (9 < balloonsContainer.childElementCount) {
+  if ((columnNum - 1) < balloonsContainer.childElementCount) {
     const array = Array.from(balloonsContainer.childNodes);
     const num = array.indexOf(lastBalloon) + 1;
-    if (randomBalloon.id === array[num - 10].id) return pickRandomBalloon();
+    if (randomBalloon.id === array[num - columnNum].id) return pickRandomBalloon();
   }
-
   lastBalloon = randomBalloon;
   return randomBalloon;
 }
 
 function renderBalloons() {
-  for (let i = 0; balloonsContainer.childElementCount < 40; i++) {
+  for (let i = 0; balloonsContainer.childElementCount < (columnNum * rowNum); i++) {
     let randomBalloon = pickRandomBalloon();
     balloons.push(randomBalloon);
     balloonsContainer.append(randomBalloon);
@@ -94,10 +94,10 @@ let dragDrop = (e) => {
 
 let validMove = () => {
   let validMoves = [
-    balloonDraggedIndex - 10,
+    balloonDraggedIndex - columnNum,
     balloonDraggedIndex - 1,
     balloonDraggedIndex + 1,
-    balloonDraggedIndex + 10,
+    balloonDraggedIndex + columnNum,
   ];
   let validMove = validMoves.includes(balloonReplacedIndex);
 
