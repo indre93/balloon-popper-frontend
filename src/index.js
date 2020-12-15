@@ -22,7 +22,8 @@ let score = 0;
 let timeUp = false;
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderWelcome();
+  // renderWelcome();
+  startNewGame();
 });
 
 function renderWelcome() {
@@ -74,12 +75,20 @@ function startNewGame() {
   renderGameExpectation();
   startTimer(duration);
   startOver();
+  mainLoop();
+}
+
+function mainLoop() {
+  if (!timeUp) {
+    game.checkForMatchingBalloons();
+    requestAnimationFrame(mainLoop);
+  }
 }
 
 function renderGameHeader() {
   currentLevel.innerHTML = "<h2>Level 1</h2>";
   playerName.innerHTML = `<h1>Hi!, ${username}</h1>`;
-  gameLives.innerHTML = "<h2>Lives: 3</h2>";
+  gameLives.innerHTML = "<h2>Life: 3</h2>";
   gameHeader.append(currentLevel, playerName, gameLives);
 }
 
@@ -90,7 +99,7 @@ function renderGameExpectation() {
     span.id = balloon.id;
     arrowImg.id = "arrow-img";
     arrowImg.src = "images/arrow.png";
-    span.innerHTML = Math.floor(Math.random() * 7) + 1;
+    span.innerHTML = Math.floor(Math.random() * 4) + 2;
     balloonExpectations.append(balloon, arrowImg, span);
   });
 }
@@ -101,11 +110,11 @@ function updateGameTarget(balloon) {
   const checkImg = document.createElement("img");
   checkImg.src = "images/check.png";
 
-  let interval = setInterval(() => {
+  setTimeout(() => {
     if (0 < targetElem.innerHTML) {
       targetElem.innerHTML -= 1;
+      console.log(targetElem);
       if (targetElem.innerHTML <= 0) targetElem.replaceWith(checkImg);
-      clearInterval(interval);
     }
   }, 0);
 }
