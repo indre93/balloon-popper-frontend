@@ -18,7 +18,6 @@ class Game {
     }
   }
 
-
   popBalloon(matchingArray, matchingBalloon) {
     if (matchingArray.every(index => balloons[index].src === matchingBalloon.src)) {
       matchingArray.forEach(index => {
@@ -45,6 +44,7 @@ class Game {
     this.checkForFourColumnMatching();
     this.checkForThreeColumnMatching();
   }
+
   checkForThreeRowMatch() {
     for (let i = 0; i <= 37; i++) {
       let possibleMatch = [i, i + 1, i + 2];
