@@ -9,15 +9,6 @@ class Game {
     renderBalloons(balloonImages, 2, false);
   }
 
-  moveBalloonsUp() {
-    for (let i = 39; 9 < i; i--) {
-      if (balloons[i - 10].currentSrc === "") {
-        balloons[i - 10].src = balloons[i].src;
-        balloons[i].src = "";
-      }
-    }
-  }
-
   popBalloon(matchingArray, matchingBalloon) {
     if (matchingArray.every(index => balloons[index].src === matchingBalloon.src)) {
       matchingArray.forEach(index => {
@@ -41,14 +32,15 @@ class Game {
     this.checkForFiveRowMatch();
     this.checkForFourRowMatch();
     this.checkForThreeRowMatch();
+    this.checkForFiveColumnMatching();
     this.checkForFourColumnMatching();
     this.checkForThreeColumnMatching();
   }
 
   checkForThreeRowMatch() {
-    for (let i = 0; i <= 37; i++) {
+    for (let i = 0; i <= 57; i++) {
       let possibleMatch = [i, i + 1, i + 2];
-      let notValid = [8, 9, 18, 19, 28, 29];
+      let notValid = [10, 11, 22, 23, 34, 35, 46, 47];
       if (notValid.includes(i)) continue;
       if (balloons[i].getAttribute("popped") === "false") {
         this.popBalloon(possibleMatch, balloons[i]);
@@ -57,9 +49,9 @@ class Game {
   }
 
   checkForFourRowMatch() {
-    for (let i = 0; i <= 36; i++) {
+    for (let i = 0; i <= 56; i++) {
       let possibleMatch = [i, i + 1, i + 2, i + 3];
-      let notValid = [7, 8, 9, 17, 18, 19, 27, 28, 29];
+      let notValid = [9, 10, 11, 21, 22, 23, 33, 34, 35, 45, 46, 47];
       if (notValid.includes(i)) continue;
       if (balloons[i].getAttribute("popped") === "false") {
         this.popBalloon(possibleMatch, balloons[i]);
@@ -68,9 +60,9 @@ class Game {
   }
 
   checkForFiveRowMatch() {
-    for (let i = 0; i <= 35; i++) {
+    for (let i = 0; i <= 55; i++) {
       let possibleMatch = [i, i + 1, i + 2, i + 3, i + 4];
-      let notValid = [6, 7, 8, 9, 16, 17, 18, 19, 26, 27, 28, 29];
+      let notValid = [8, 9, 10, 11, 20, 21, 22, 23, 32, 33, 34, 35, 44, 45, 46, 47];
       if (notValid.includes(i)) continue;
       if (balloons[i].getAttribute("popped") === "false") {
         this.popBalloon(possibleMatch, balloons[i]);
@@ -79,8 +71,8 @@ class Game {
   }
 
   checkForThreeColumnMatching() {
-    for (let i = 0; i <= 19; i++) {
-      let possibleMatch = [i, i + 10, i + 10 * 2];
+    for (let i = 0; i <= 35; i++) {
+      let possibleMatch = [i, i + 12, i + 12 * 2];
       if (balloons[i].getAttribute("popped") === "false") {
         this.popBalloon(possibleMatch, balloons[i]);
       }
@@ -88,8 +80,17 @@ class Game {
   }
 
   checkForFourColumnMatching() {
-    for (let i = 0; i <= 9; i++) {
-      let possibleMatch = [i, i + 10, i + 10 * 2, i + 10 * 3];
+    for (let i = 0; i <= 23; i++) {
+      let possibleMatch = [i, i + 12, i + 12 * 2, i + 12 * 3];
+      if (balloons[i].getAttribute("popped") === "false") {
+        this.popBalloon(possibleMatch, balloons[i]);
+      }
+    }
+  }
+
+  checkForFiveColumnMatching() {
+    for (let i = 0; i <= 11; i++) {
+      let possibleMatch = [i, i + 12, i + 12 * 2, i + 12 * 3, i + 12 * 4];
       if (balloons[i].getAttribute("popped") === "false") {
         this.popBalloon(possibleMatch, balloons[i]);
       }
