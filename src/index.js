@@ -99,7 +99,7 @@ function renderGameExpectation() {
     span.id = balloon.id;
     arrowImg.id = "arrow-img";
     arrowImg.src = "images/arrow.png";
-    span.innerHTML = Math.floor(Math.random() * 4) + 2;
+    span.innerHTML = Math.floor(Math.random() * 5) + 5;
     balloonExpectations.append(balloon, arrowImg, span);
   });
 }
@@ -111,10 +111,11 @@ function updateGameTarget(balloon) {
   checkImg.src = "images/check.png";
 
   setTimeout(() => {
-    if (0 < targetElem.innerHTML) {
-      targetElem.innerHTML -= 1;
-      console.log(targetElem);
-      if (targetElem.innerHTML <= 0) targetElem.replaceWith(checkImg);
+    if (typeof targetElem !== "undefined") {
+      if (0 < targetElem.innerHTML) {
+        targetElem.innerHTML -= 1;
+        if (targetElem.innerHTML <= 0) targetElem.replaceWith(checkImg);
+      }
     }
   }, 0);
 }
