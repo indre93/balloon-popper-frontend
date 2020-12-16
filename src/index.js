@@ -11,8 +11,9 @@ const balloonExpectations = document.querySelector("#balloon-expectations");
 const balloonTargetNum = balloonExpectations.getElementsByTagName("span");
 const balloonsContainer = document.querySelector(".balloons-container");
 const countdown = document.querySelector("#timer");
-const scoreCount = document.querySelector("#score-count");
-const startOverBtn = document.querySelector("button#start-over-button");
+const winnerContainer = document.querySelectorAll(".winner-modal>.balloons-img");
+const finalScore = document.querySelector("#final-score");
+const scoreBoardBtn = document.querySelector("button#see-scoreboard-btn");
 const popSound = new Audio("sounds/pop.mp3");
 let games = new Games();
 let game = new Game();
@@ -112,10 +113,11 @@ function renderGameExpectation() {
 }
 
 function updateGameTarget(balloon) {
-  const array = Array.from(balloonTargetNum);
+  const array = Array.from(balloonExpectations.getElementsByTagName("span"));
   const targetElem = array.find(elem => elem.id === balloon.id);
   const checkImg = document.createElement("img");
   checkImg.src = "images/check.png";
+  checkImg.id = "checkMark";
 
   setTimeout(() => {
     if (typeof targetElem !== "undefined") {
@@ -142,6 +144,21 @@ function startTimer(duration) {
     }
   }, 1000);
 };
+
+function wonGame() {
+  winnerContainer.forEach(div => renderLogo(div, -190));
+  balloonsContainer.style.display = "none";
+  modalWin.style.display = "grid";
+  finalScore.innerHTML = scoreCount.innerHTML;
+
+  scoreBoardBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (e.type === "click") {
+      modalWin.style.display = "none";
+      modalTable.style.display = "grid";
+    }
+  });
+}
 
 function startOver() {
   startOverBtn.addEventListener("click", (e) => {
