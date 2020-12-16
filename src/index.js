@@ -1,16 +1,16 @@
 const modalForm = document.querySelector(".user-form-modal");
 const modalTable = document.querySelector(".scoreboard-modal");
+const modalWin = document.querySelector(".winner-modal");
 const userForm = document.querySelector(".new-user-form");
 const userInput = document.querySelector("input#username");
-const gameHeader = document.querySelector("#game-header");
-const currentLevel = document.querySelector("#current-level");
+const gameHeader = document.querySelectorAll("#game-header>.fireworks");
 const playerName = document.querySelector("#player-name");
-const gameLives = document.querySelector("#game-lives");
 const gameExpectation = document.querySelector(".game-expectation");
 const balloonExpectations = document.querySelector("#balloon-expectations");
-const balloonTargetNum = balloonExpectations.getElementsByTagName("span");
 const balloonsContainer = document.querySelector(".balloons-container");
 const countdown = document.querySelector("#timer");
+const scoreCount = document.querySelector("#score-count>p>span");
+const startOverBtn = document.querySelector("button#start-over-btn");
 const winnerContainer = document.querySelectorAll(".winner-modal>.balloons-img");
 const finalScore = document.querySelector("#final-score");
 const scoreBoardBtn = document.querySelector("button#see-scoreboard-btn");
@@ -81,8 +81,8 @@ function getUsername() {
 }
 
 function startNewGame() {
+  playerName.innerHTML = `<h1>Hi! ${username}</h1>`;
   game.begin();
-  renderGameHeader();
   renderGameExpectation();
   startTimer(duration);
   startOver();
@@ -107,7 +107,7 @@ function renderGameExpectation() {
     span.id = balloon.id;
     arrowImg.id = "arrow-img";
     arrowImg.src = "images/arrow.png";
-    span.innerHTML = Math.floor(Math.random() * 5) + 5;
+    span.innerHTML = Math.floor(Math.random() * 4) + 5;
     balloonExpectations.append(balloon, arrowImg, span);
   });
 }
@@ -170,7 +170,7 @@ function startOver() {
       balloonExpectations.innerHTML = "";
       username = "";
       playerName.innerHTML = "<h1>Welcome to the Balloon Popper Game!</h1>";
-      scoreCount.innerHTML = "<p>Score: 0</p>";
+      scoreCount.innerHTML = "<p>0</p>";
       countdown.innerHTML = "<span>00:00</span>";
       renderWelcome();
     }
