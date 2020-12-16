@@ -205,6 +205,43 @@ input[type=text]:focus {
   outline: none;
 }
 
+.winner-modal {
+  display: none;
+  z-index: 100;
+  display: none;
+  border-radius: 10px;
+  z-index: 100;
+  width: 700px;
+  height: 500px;
+  background-color: rgba(0, 0, 0, 0.4);
+  grid-template-columns: 180px auto 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.winner-modal img#balloons {
+  padding: 20px;
+}
+
+.won-game {
+  z-index: 100;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: repeat(4, auto);
+  align-content: center;
+  justify-content: center;
+}
+
+.won-game h1, .won-game p {
+  align-self: center;
+  justify-self: center;
+}
+
+.won-game h1 {
+  margin: 15px;
+  font-size: 50px;
+}
+
 .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s
