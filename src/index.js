@@ -167,8 +167,6 @@ function startOver() {
   startOverBtn.addEventListener("click", (e) => {
     if (e.type === "click") {
       game = "";
-      currentLevel.innerHTML = "";
-      gameLives.innerHTML = "";
       balloonsContainer.innerHTML = "";
       balloonExpectations.innerHTML = "";
       username = "";
