@@ -27,26 +27,36 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function renderWelcome() {
-  renderLogo();
-  playerName.innerHTML = "<h1>Welcome to the Balloon Popper Game!</h1>";
-  modalForm.style.display = "block";
   balloonsContainer.style.display = "none";
+  modalTable.style.display = "none";
+  modalForm.style.display = "block";
+  renderHeader();
+  renderLogo(gameExpectation, 150);
   getUsername();
 }
 
-function renderLogo() {
-  const logo = document.createElement("img");
-  logo.src = "images/balloons-logo.png";
-  logo.id = "logo";
-  gameExpectation.prepend(logo);
-  movingLogo(logo);
+function renderHeader() {
+  playerName.innerHTML = "<h1>Welcome to the Balloon Popper Game!</h1>";
+  gameHeader.forEach(div => {
+    const img = document.createElement("img");
+    img.src = "images/fireworks.png";
+    div.append(img);
+  });
 }
 
-function movingLogo(img) {
+function renderLogo(container, endingPos) {
+  const balloonsImg = document.createElement("img");
+  balloonsImg.src = "images/balloons-logo.png";
+  balloonsImg.id = "balloons";
+  container.prepend(balloonsImg);
+  movingLogo(balloonsImg, endingPos);
+}
+
+function movingLogo(img, endingPos) {
   let pos = 500;
   let id = setInterval(frame, 20);
   function frame() {
-    if (pos == 150) {
+    if (pos == endingPos) {
       clearInterval(id);
     } else {
       pos--;
