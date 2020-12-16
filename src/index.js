@@ -150,6 +150,9 @@ function wonGame() {
   balloonsContainer.style.display = "none";
   modalWin.style.display = "grid";
   finalScore.innerHTML = scoreCount.innerHTML;
+  gameHeader.forEach(div => {
+    div.className += " animate";
+  });
 
   scoreBoardBtn.addEventListener("click", (e) => {
     e.preventDefault();
