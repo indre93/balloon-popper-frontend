@@ -9,25 +9,6 @@ class Game {
     renderBalloons(balloonImages, 2, false);
   }
 
-  popBalloon(matchingArray, matchingBalloon) {
-    if (matchingArray.every(index => balloons[index].src === matchingBalloon.src)) {
-      matchingArray.forEach(index => {
-        popSound.play();
-        balloons[index].src = "images/pop.png";
-        balloons[index].setAttribute("popped", "true");
-
-        setTimeout(() => {
-          if (balloons[index].getAttribute("popped") === "true") {
-            updateGameTarget(balloons[index]);
-            scoreCount.innerHTML = `<p>Score: ${(score += 10)}</p>`;
-            balloons[index].setAttribute("popped", "null");
-            balloons[index].src = "";
-          }
-        }, 100);
-      });
-    }
-  }
-
   checkForMatchingBalloons() {
     this.checkForFiveRowMatch();
     this.checkForFourRowMatch();
@@ -35,6 +16,25 @@ class Game {
     this.checkForFiveColumnMatching();
     this.checkForFourColumnMatching();
     this.checkForThreeColumnMatching();
+  }
+
+  popBalloon(matchingArray, matchingBalloon) {
+    if (matchingArray.every(index => balloons[index].src === matchingBalloon.src)) {
+      matchingArray.forEach(index => {
+        balloons[index].src = "images/pop.png";
+        popSound.play();
+        balloons[index].setAttribute("popped", "true");
+
+        setTimeout(() => {
+          if (balloons[index].getAttribute("popped") === "true") {
+            updateGameTarget(balloons[index]);
+            scoreCount.innerHTML = `${(score += 10)}`;
+            balloons[index].setAttribute("popped", "null");
+            balloons[index].src = "";
+          }
+        }, 100);
+      });
+    }
   }
 
   checkForThreeRowMatch() {
