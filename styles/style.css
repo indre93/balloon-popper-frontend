@@ -203,7 +203,7 @@ input#start-game-btn {
   outline: none;
   border-radius: 20px;
   padding: 15px;
-  font-size: 20px;
+  font-size: 25px;
   background-color: rgb(181, 97, 8);
   border-color: rgba(182, 155, 120, 0.843);
 }
