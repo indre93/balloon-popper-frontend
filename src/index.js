@@ -89,19 +89,16 @@ function startNewGame() {
 }
 
 function mainLoop() {
-  if (!timeUp) {
+  const array = Array.from(balloonExpectations.getElementsByTagName("img"));
+  const checkMarks = array.filter(elem => elem.id === "checkMark");
+
+  if (!timeUp && checkMarks.length != 6) {
     game.checkForMatchingBalloons();
     requestAnimationFrame(mainLoop);
+  } else if (!timeUp && checkMarks.length === 6) {
+    wonGame();
   }
 }
-
-function renderGameHeader() {
-  currentLevel.innerHTML = "<h2>Level 1</h2>";
-  playerName.innerHTML = `<h1>Hi!, ${username}</h1>`;
-  gameLives.innerHTML = "<h2>Life: 3</h2>";
-  gameHeader.append(currentLevel, playerName, gameLives);
-}
-
 function renderGameExpectation() {
   getBalloonImages(balloonExpectationImgs, 4).forEach(balloon => {
     const arrowImg = document.createElement("img");
