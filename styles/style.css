@@ -16,15 +16,16 @@ body {
 }
 
 .header-class {
-  background-color: rgba(109, 127, 151, 0.5);
-  border-radius: 10px;
+  background-image: url(../images/night.png);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
-  padding: 10px;
+  border-radius: 10px;
   margin: 10px;
   height: 75px;
   width: auto;
   grid-column-start: 1;
   grid-column-end: 4;
+  align-content: center;
+  justify-items: center;
 }
 
 #game-header {
@@ -34,22 +35,26 @@ body {
   align-content: center;
 }
 
-#current-level {
-  justify-self: self-start;
+.fireworks img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.fireworks {
+  justify-self: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 #player-name {
   justify-self: center;
   align-self: center;
-}
-
-#game-lives {
-  width: auto;
-  justify-self: self-end;
+  padding: 55px;
 }
 
 .game-expectation {
-  background-color: rgba(109, 127, 151, 0.5);
+  background-image: url(../images/night.png);
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
   padding: 10px;
@@ -60,7 +65,7 @@ body {
   overflow: hidden;
 }
 
-#logo {
+#balloons {
   width: 180px;
   height: auto;
   position: absolute;
@@ -111,12 +116,21 @@ body {
   place-self: center;
   max-width: 100%;
   max-height: 100%;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.balloons-container img:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
 }
 
 .current-game-info {
   display: grid;
   flex-wrap: wrap;
-  background-color: rgba(109, 127, 151, 0.5);
+  background-image: url(../images/night.png);
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
   text-align: center;
@@ -135,7 +149,7 @@ body {
   margin-top: 50px;
 }
 
-#start-over-button {
+#start-over-btn, #see-scoreboard-btn {
   height: auto;
   margin-top: 75px;
   padding: 15px;
@@ -161,19 +175,19 @@ body {
 }
 
 .new-user-form {
+  box-shadow: 0 2px 4px rgba(10, 10, 10, 0.639), inset 0 1px 0 rgba(255, 255, 255, 0.531);
   background-image: url(../images/night.png);
   display: grid;
   color: black;
-  background-color: #fefefe;
   width: auto;
   height: 300px;
-  border-radius: 25px;
+  border-radius: 10px;
   padding: 40px;
 }
 
 .new-user-form label {
   text-align: center;
-  font-size: 25px;
+  font-size: 20px;
   justify-self: center;
   align-self: center;
 }
@@ -186,6 +200,7 @@ input#username {
   font-size: large;
   text-align: center;
   display: inline-block;
+  font-size: 20px;
 }
 
 input#start-game-btn {
@@ -194,7 +209,7 @@ input#start-game-btn {
   outline: none;
   border-radius: 20px;
   padding: 15px;
-  font-size: 30px;
+  font-size: 20px;
   background-color: rgb(181, 97, 8);
   border-color: rgba(182, 155, 120, 0.843);
 }
