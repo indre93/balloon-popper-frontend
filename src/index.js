@@ -1,6 +1,6 @@
 const modalForm = document.querySelector(".user-form-modal");
 const modalTable = document.querySelector(".scoreboard-modal");
-const modalWin = document.querySelector(".winner-modal");
+const modalEndGame = document.querySelector(".end-game-modal");
 const userForm = document.querySelector(".new-user-form");
 const userInput = document.querySelector("input#username");
 const gameHeader = document.querySelectorAll("#game-header>.fireworks");
@@ -11,7 +11,7 @@ const balloonsContainer = document.querySelector(".balloons-container");
 const countdown = document.querySelector("#timer");
 const scoreCount = document.querySelector("#score-count>p>span");
 const startOverBtn = document.querySelector("button#start-over-btn");
-const winnerContainer = document.querySelectorAll(".winner-modal>.balloons-img");
+const endGameBalloons = document.querySelectorAll(".end-game-modal>.balloons-img");
 const finalScore = document.querySelector("#final-score");
 const scoreBoardBtn = document.querySelector("button#see-scoreboard-btn");
 const popSound = new Audio("sounds/pop.mp3");
@@ -164,9 +164,9 @@ function startTimer(duration) {
 
 function wonGame() {
   addUserAndGameData();
-  winnerContainer.forEach(div => renderLogo(div, -190));
+  endGameBalloons.forEach(div => renderLogo(div, -190));
   balloonsContainer.style.display = "none";
-  modalWin.style.display = "grid";
+  modalEndGame.style.display = "grid";
   finalScore.innerHTML = score;
   gameHeader.forEach(div => {
     div.className += " animate";
@@ -175,7 +175,7 @@ function wonGame() {
   scoreBoardBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (e.type === "click") {
-      modalWin.style.display = "none";
+      modalEndGame.style.display = "none";
       modalTable.style.display = "grid";
     }
   });
