@@ -194,7 +194,7 @@ input#username {
   font-size: large;
   text-align: center;
   display: inline-block;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 input#start-game-btn {
@@ -252,8 +252,8 @@ input[type=text]:focus {
 }
 
 .animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s
+  -webkit-animation: animatezoom 0.9s;
+  animation: animatezoom 0.9s
 }
 
 @-webkit-keyframes animatezoom {
