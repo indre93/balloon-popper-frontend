@@ -209,8 +209,10 @@ function gameOver() {
   modalEndGame.style.display = "grid";
   modalEndGame.style.gridTemplateColumns = "150px auto 150px";
   const h1 = document.createElement("h1");
-  h1.innerHTML = "Sorry, you lose...";
-  endGameContainer.prepend(h1);
+  const h2 = document.createElement("h2");
+  h1.innerHTML = "Sorry...you lost";
+  h2.innerHTML = "you were so close!";
+  endGameContainer.prepend(h1, h2);
 
   endGameBtn.innerHTML = "<p>Try Again</p>";
   endGameBtn.addEventListener("click", (e) => {
