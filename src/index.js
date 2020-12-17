@@ -154,11 +154,12 @@ function startTimer(duration) {
     countdown.innerHTML = `<p>${minutes}:${seconds}</p>`;
     --timer;
     if (timer < 20) {
-      countdown.childNodes[0].style.color = "orangered";
+      countdown.childNodes[0].className = "blink";
     }
     if (timer < 0) {
       clearInterval(counter);
       timeUp = true;
+      countdown.childNodes[0].className = "";
     }
   }, 1000);
 };
