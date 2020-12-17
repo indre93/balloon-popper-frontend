@@ -94,7 +94,7 @@ function mainLoop() {
   const checkMarks = array.filter(elem => elem.id === "checkMark");
 
   if (!timeUp && checkMarks.length != 6) {
-    game.checkForMatchingBalloons();
+    checkForMatchingBalloons();
     requestAnimationFrame(mainLoop);
   } else if (!timeUp && checkMarks.length === 6) {
     wonGame();
