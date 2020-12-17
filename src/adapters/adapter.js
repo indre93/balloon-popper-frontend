@@ -10,8 +10,11 @@ const adapter = {
     const user = { username: username };
     return fetch(`${BASE_URL}/users`, {
       method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user })
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(user)
     })
       .then(resp => resp.json())
       .then(user => new User(user));
@@ -24,8 +27,11 @@ const adapter = {
     };
     return fetch(`${BASE_URL}/games`, {
       method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ game })
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(game)
     })
       .then(resp => resp.json())
       .then(game => new Game(game));
