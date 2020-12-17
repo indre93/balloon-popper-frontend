@@ -33,7 +33,7 @@ function renderWelcome() {
   modalForm.style.display = "block";
   renderHeader();
   renderLogo(gameExpectation, 150);
-  getUsername();
+  getCurrentUser();
 }
 
 function renderHeader() {
@@ -66,26 +66,24 @@ function movingLogo(img, endingPos) {
   }
 }
 
-function getUsername() {
+function getCurrentUser() {
   userForm.addEventListener("submit", (e) => {
     if (e.type === "submit") {
       e.preventDefault();
-      modalForm.style.display = "none";
-      balloonsContainer.style.display = "grid";
-      gameExpectation.firstElementChild.remove();
       username = userInput.value;
-      // adapter.createUser(username);
       startNewGame();
     }
   });
 }
 
 function startNewGame() {
+  modalForm.style.display = "none";
+  balloonsContainer.style.display = "grid";
+  gameExpectation.firstElementChild.remove();
   playerName.innerHTML = `<h1>Hi! ${username}</h1>`;
   renderBalloons(balloonImages, 2, false);
   renderGameExpectation();
   startTimer(duration);
-  startOver();
   mainLoop();
 }
 
