@@ -186,9 +186,12 @@ function checkForFiveColumnMatching() {
 function popBalloon(matchingArray, matchingBalloon) {
   if (matchingArray.every(index => balloons[index].src === matchingBalloon.src)) {
     matchingArray.forEach(index => {
-      balloons[index].src = "images/pop.png";
-      popSound.play();
-      balloons[index].setAttribute("popped", "true");
+
+      setTimeout(() => {
+        balloons[index].src = "images/pop.png";
+        popSound.play();
+        balloons[index].setAttribute("popped", "true");
+      }, 0);
 
       setTimeout(() => {
         if (balloons[index].getAttribute("popped") === "true") {
@@ -198,6 +201,7 @@ function popBalloon(matchingArray, matchingBalloon) {
           balloons[index].src = "";
         }
       }, 100);
+
     });
   }
 }
