@@ -158,14 +158,13 @@ function startTimer(duration) {
     }
     if (timer < 0) {
       clearInterval(counter);
-      gameOver();
+      timeUp = true;
     }
   }, 1000);
 };
 
 function wonGame() {
   addUserAndGameData();
-  endGameBalloons.forEach(div => renderLogo(div, -190));
   balloonsContainer.style.display = "none";
   modalEndGame.style.display = "grid";
   endGameBalloons.forEach(div => renderLogo(div, -190));
@@ -205,7 +204,6 @@ function startOver() {
 }
 
 function gameOver() {
-  timeUp = true;
   balloonsContainer.style.display = "none";
   modalEndGame.style.display = "grid";
   modalEndGame.style.gridTemplateColumns = "150px auto 150px";
