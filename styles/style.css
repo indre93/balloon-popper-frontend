@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  color: white;
   margin: 0;
   height: 100%;
   font-family: "Do Hyeon", sans-serif;
@@ -8,7 +7,7 @@
 
 body {
   background: radial-gradient(circle, rgb(228, 150, 105) 0%, rgb(233, 112, 42) 89%, rgb(214, 85, 10) 100%);
-  color: white;
+  color: rgb(231, 231, 231);
   display: grid;
   grid-template-columns: repeat(3, auto);
   justify-content: center;
@@ -223,7 +222,7 @@ input[type=text]:focus {
   width: 700px;
   height: 500px;
   background-color: rgba(0, 0, 0, 0.4);
-  grid-template-columns: 180px auto 180px;
+  grid-template-columns: 175px auto 175px;
   position: relative;
   overflow: hidden;
 }
@@ -241,7 +240,7 @@ input[type=text]:focus {
   justify-content: center;
 }
 
-.end-game-container h1, .end-game-container p {
+.end-game-container h1, .end-game-container p, .end-game-container h2 {
   align-self: center;
   justify-self: center;
 }
@@ -358,4 +357,14 @@ table {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
   background-color: rgb(181, 97, 8);
+}
+
+.blink {
+  animation: blinker 2s ease-in-out infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
