@@ -11,9 +11,10 @@ const balloonsContainer = document.querySelector(".balloons-container");
 const countdown = document.querySelector("#timer");
 const scoreCount = document.querySelector("#score-count>p>span");
 const startOverBtn = document.querySelector("button#start-over-btn");
+const endGameContainer = document.querySelector(".end-game-container");
 const endGameBalloons = document.querySelectorAll(".end-game-modal>.balloons-img");
 const finalScore = document.querySelector("#final-score");
-const scoreBoardBtn = document.querySelector("button#see-scoreboard-btn");
+const endGameBtn = document.querySelector("button#end-game-btn");
 const popSound = new Audio("sounds/pop.mp3");
 let duration = 60 * 2;
 let username;
@@ -167,12 +168,19 @@ function wonGame() {
   endGameBalloons.forEach(div => renderLogo(div, -190));
   balloonsContainer.style.display = "none";
   modalEndGame.style.display = "grid";
+  endGameBalloons.forEach(div => renderLogo(div, -190));
+  const h1 = document.createElement("h1");
+  const p = document.createElement("p");
+  h1.innerHTML = "You Win!";
+  p.innerHTML = "Final Score:";
+  endGameContainer.prepend(h1, p);
   finalScore.innerHTML = score;
   gameHeader.forEach(div => {
     div.className += " animate";
   });
 
-  scoreBoardBtn.addEventListener("click", (e) => {
+  endGameBtn.innerHTML = "<p>See Scoreboard</p>";
+  endGameBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (e.type === "click") {
       modalEndGame.style.display = "none";
@@ -199,5 +207,18 @@ function startOver() {
 function gameOver() {
   timeUp = true;
   balloonsContainer.style.display = "none";
-  modalTable.style.display = "block";
+  modalEndGame.style.display = "grid";
+  modalEndGame.style.gridTemplateColumns = "150px auto 150px";
+  const h1 = document.createElement("h1");
+  h1.innerHTML = "Sorry, you lose...";
+  endGameContainer.prepend(h1);
+
+  endGameBtn.innerHTML = "<p>Try Again</p>";
+  endGameBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (e.type === "click") {
+
+      console.log(e.type);
+    }
+  });
 }
