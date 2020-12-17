@@ -82,7 +82,7 @@ function getUsername() {
 
 function startNewGame() {
   playerName.innerHTML = `<h1>Hi! ${username}</h1>`;
-  game.begin();
+  renderBalloons(balloonImages, 2, false);
   renderGameExpectation();
   startTimer(duration);
   startOver();
