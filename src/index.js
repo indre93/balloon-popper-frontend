@@ -94,8 +94,19 @@ function mainLoop() {
   if (!timeUp && checkMarks.length != 6) {
     checkForMatchingBalloons();
     requestAnimationFrame(mainLoop);
-  } else if (!timeUp && checkMarks.length === 6) {
+  } else {
+    cancelAnimationFrame(mainLoop);
+    endGame(checkMarks);
+  }
+}
+
+function endGame(checkMarks) {
+  if (!timeUp && checkMarks.length === 6) {
     wonGame();
+  } else if (timeUp) {
+    gameOver();
+  } else {
+    startOver();
   }
 }
 
