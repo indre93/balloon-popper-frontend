@@ -47,7 +47,7 @@ body {
   padding: 20px;
 }
 
-.game-expectation {
+.game-target-goal {
   background-image: url(../images/night.png);
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
@@ -65,7 +65,7 @@ body {
   position: absolute;
 }
 
-#balloon-expectations {
+#balloon-target-goals {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: repeat(6, 1fr);
@@ -74,11 +74,11 @@ body {
   font-size: 40px;
 }
 
-#balloon-expectations span {
+#balloon-target-goals span {
   height: auto;
 }
 
-#balloon-expectations img, #balloon-expectation span, #arrow-img {
+#balloon-target-goals img, #balloon-expectation span, #arrow-img {
   padding: 5px;
 }
 

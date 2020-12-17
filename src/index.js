@@ -5,8 +5,8 @@ const userForm = document.querySelector(".new-user-form");
 const userInput = document.querySelector("input#username");
 const gameHeader = document.querySelectorAll("#game-header>.fireworks");
 const playerName = document.querySelector("#player-name");
-const gameExpectation = document.querySelector(".game-expectation");
-const balloonExpectations = document.querySelector("#balloon-expectations");
+const gameTargetGoal = document.querySelector(".game-target-goal");
+const balloonTargetGoals = document.querySelector("#balloon-target-goals");
 const balloonsContainer = document.querySelector(".balloons-container");
 const countdown = document.querySelector("#timer");
 const scoreCount = document.querySelector("#score-count>p>span");
@@ -29,7 +29,7 @@ function renderWelcome() {
   modalTable.style.display = "none";
   modalForm.style.display = "block";
   renderHeader();
-  renderLogo(gameExpectation, 150);
+  renderLogo(gameTargetGoal, 150);
   getCurrentUser();
 }
 
@@ -76,7 +76,7 @@ function getCurrentUser() {
 function startNewGame() {
   modalForm.style.display = "none";
   balloonsContainer.style.display = "grid";
-  gameExpectation.firstElementChild.remove();
+  gameTargetGoal.firstElementChild.remove();
   playerName.innerHTML = `<h1>Hi! ${username}</h1>`;
   renderBalloons(balloonImages, 2, false);
   renderGameExpectation();
@@ -85,7 +85,7 @@ function startNewGame() {
 }
 
 function mainLoop() {
-  const array = Array.from(balloonExpectations.getElementsByTagName("img"));
+  const array = Array.from(balloonTargetGoals.getElementsByTagName("img"));
   const checkMarks = array.filter(elem => elem.id === "checkMark");
 
   if (!timeUp && checkMarks.length != 6) {
@@ -122,12 +122,12 @@ function renderGameExpectation() {
     arrowImg.id = "arrow-img";
     arrowImg.src = "images/arrow.png";
     span.innerHTML = Math.floor(Math.random() * 4) + 5;
-    balloonExpectations.append(balloon, arrowImg, span);
+    balloonTargetGoals.append(balloon, arrowImg, span);
   });
 }
 
 function updateGameTarget(balloon) {
-  const array = Array.from(balloonExpectations.getElementsByTagName("span"));
+  const array = Array.from(balloonTargetGoals.getElementsByTagName("span"));
   const targetElem = array.find(elem => elem.id === balloon.id);
   const checkImg = document.createElement("img");
   checkImg.src = "images/check.png";
@@ -186,7 +186,7 @@ function startOver() {
     if (e.type === "click") {
       game = "";
       balloonsContainer.innerHTML = "";
-      balloonExpectations.innerHTML = "";
+      balloonTargetGoals.innerHTML = "";
       username = "";
       playerName.innerHTML = "<h1>Welcome to the Balloon Popper Game!</h1>";
       scoreCount.innerHTML = "<p>0</p>";
