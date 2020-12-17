@@ -136,9 +136,12 @@ function startTimer(duration) {
     seconds = seconds < 10 ? "0" + seconds : seconds;
     countdown.innerHTML = `<p>${minutes}:${seconds}</p>`;
     --timer;
+    if (timer < 20) {
+      countdown.childNodes[0].style.color = "orangered";
+    }
     if (timer < 0) {
       clearInterval(counter);
-      // gameOver();
+      gameOver();
     }
   }, 1000);
 };
