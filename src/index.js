@@ -15,16 +15,13 @@ const winnerContainer = document.querySelectorAll(".winner-modal>.balloons-img")
 const finalScore = document.querySelector("#final-score");
 const scoreBoardBtn = document.querySelector("button#see-scoreboard-btn");
 const popSound = new Audio("sounds/pop.mp3");
-let games = new Games();
-let game = new Game();
 let duration = 60 * 2;
 let username;
 let score = 0;
 let timeUp = false;
 
 document.addEventListener("DOMContentLoaded", () => {
-  // renderWelcome();
-  startNewGame();
+  renderWelcome();
 });
 
 function renderWelcome() {
