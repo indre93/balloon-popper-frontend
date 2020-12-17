@@ -150,7 +150,7 @@ function wonGame() {
   winnerContainer.forEach(div => renderLogo(div, -190));
   balloonsContainer.style.display = "none";
   modalWin.style.display = "grid";
-  finalScore.innerHTML = scoreCount.innerHTML;
+  finalScore.innerHTML = score;
   gameHeader.forEach(div => {
     div.className += " animate";
   });
