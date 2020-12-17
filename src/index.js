@@ -55,7 +55,7 @@ function renderLogo(container, endingPos) {
 
 function movingLogo(img, endingPos) {
   let pos = 500;
-  let id = setInterval(frame, 20);
+  let id = setInterval(frame, 10);
   function frame() {
     if (pos == endingPos) {
       clearInterval(id);
