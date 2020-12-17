@@ -1,13 +1,14 @@
 const BASE_URL = "http://localhost:3000";
 
 const adapter = {
-
   getGames: () => {
     return fetch(`${BASE_URL}/games`).then(res => res.json());
   },
 
   createUser: (username) => {
-    const user = { username: username };
+    const user = {
+      username: username
+    };
     return fetch(`${BASE_URL}/users`, {
       method: "POST",
       headers: {
@@ -17,12 +18,15 @@ const adapter = {
       body: JSON.stringify(user)
     })
       .then(resp => resp.json())
-      .then(user => new User(user));
+      .then(user => new User(user.id, user.username))
+      .catch((error) => {
+        console.log(error.message);
+      });
   },
 
-  createGame: (username, score) => {
+  createGame: (user, score) => {
     const game = {
-      username: username,
+      user_id: user.id,
       score: score
     };
     return fetch(`${BASE_URL}/games`, {
@@ -34,7 +38,10 @@ const adapter = {
       body: JSON.stringify(game)
     })
       .then(resp => resp.json())
-      .then(game => new Game(game));
+      .then(game => new Game(game))
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
 
 };
