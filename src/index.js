@@ -98,6 +98,14 @@ function mainLoop() {
     wonGame();
   }
 }
+
+async function addUserAndGameData() {
+  const user = await adapter.createUser(username);
+  await adapter.createGame(user, score);
+  const allGames = new Games();
+  return allGames;
+}
+
 function renderGameExpectation() {
   getBalloonImages(balloonExpectationImgs, 4).forEach(balloon => {
     const arrowImg = document.createElement("img");
@@ -147,6 +155,7 @@ function startTimer(duration) {
 };
 
 function wonGame() {
+  addUserAndGameData();
   winnerContainer.forEach(div => renderLogo(div, -190));
   balloonsContainer.style.display = "none";
   modalWin.style.display = "grid";
