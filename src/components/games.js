@@ -9,6 +9,7 @@ class Games {
       .then(games => {
         games.forEach(game => this.games.push(new Game(
           game.id,
+          game.user_id,
           game.user.username,
           game.score
         )));
@@ -23,6 +24,7 @@ class Games {
   renderTopGamesBoard(game) {
     const tBody = document.getElementById("table-body");
     let tr = document.createElement("tr");
+    tr.dataset.userId = `${game.userId}`;
     tr.innerHTML = `<td></td><td>${game.username}</td><td>${game.score}</td>`;
     tBody.append(tr);
     this.assignPositionNumber(tBody);
