@@ -197,7 +197,7 @@ function popBalloon(matchingArray, matchingBalloon) {
       setTimeout(() => {
         if (balloons[index].getAttribute("popped") === "true") {
           updateGameTarget(balloons[index]);
-          scoreCount.innerHTML = `${(score += 10)}`;
+          document.querySelector("#score-count>p>span").innerHTML = `${(score += 10)}`;
           balloons[index].setAttribute("popped", "null");
           balloons[index].src = "";
         }

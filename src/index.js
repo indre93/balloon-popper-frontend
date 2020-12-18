@@ -1,11 +1,11 @@
 const modalTable = document.querySelector(".scoreboard-modal");
 const modalEndGame = document.querySelector(".end-game-modal");
+const balloonsContainer = document.querySelector(".balloons-container");
+
 const mainHeader = document.querySelector("#main-header");
 const gameHeader = document.querySelectorAll("#game-header>.fireworks");
 const gameTargetGoal = document.querySelector(".game-target-goal");
 const balloonTargetGoals = document.querySelector("#balloon-target-goals");
-const balloonsContainer = document.querySelector(".balloons-container");
-const scoreCount = document.querySelector("#score-count>p>span");
 const endGameContainer = document.querySelector(".end-game-container");
 const endGameBtn = document.querySelector("button#end-game-btn");
 let duration = 60 * 3;
