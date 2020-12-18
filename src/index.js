@@ -20,6 +20,7 @@ let duration = 60 * 2;
 let username;
 let score = 0;
 let timeUp = false;
+let currentUser;
 
 document.addEventListener("DOMContentLoaded", () => {
   renderWelcome();
@@ -85,36 +86,6 @@ function startNewGame() {
   mainLoop();
 }
 
-function mainLoop() {
-  const array = Array.from(balloonTargetGoals.getElementsByTagName("img"));
-  const checkMarks = array.filter(elem => elem.id === "checkMark");
-
-  if (!timeUp && checkMarks.length != 6) {
-    checkForMatchingBalloons();
-    requestAnimationFrame(mainLoop);
-  } else {
-    cancelAnimationFrame(mainLoop);
-    endGame(checkMarks);
-  }
-}
-
-function endGame(checkMarks) {
-  if (!timeUp && checkMarks.length === 6) {
-    wonGame();
-  } else if (timeUp) {
-    gameOver();
-  } else {
-    startOver();
-  }
-}
-
-async function addUserAndGameData() {
-  const user = await adapter.createUser(username);
-  await adapter.createGame(user, score);
-  const allGames = new Games();
-  return allGames;
-}
-
 function renderGameExpectation() {
   getBalloonImages(balloonExpectationImgs, 4).forEach(balloon => {
     const arrowImg = document.createElement("img");
@@ -164,6 +135,44 @@ function startTimer(duration) {
   }, 1000);
 };
 
+function mainLoop() {
+  const array = Array.from(balloonTargetGoals.getElementsByTagName("img"));
+  const checkMarks = array.filter(elem => elem.id === "checkMark");
+
+  if (!timeUp && checkMarks.length != 6) {
+    checkForMatchingBalloons();
+    requestAnimationFrame(mainLoop);
+  } else {
+    cancelAnimationFrame(mainLoop);
+    endGame(checkMarks);
+  }
+}
+
+function endGame(checkMarks) {
+  if (!timeUp && checkMarks.length === 6) {
+    wonGame();
+  } else if (timeUp) {
+    gameOver();
+  } else {
+    startOver();
+  }
+}
+
+async function addUserAndGameData() {
+  const user = await adapter.createUser(username);
+  await adapter.createGame(user, score);
+  currentUser = user;
+  const games = new Games();
+  return games;
+}
+
+function highlightCurrentUser() {
+  const trows = Array.from(document.getElementsByTagName("tr"));
+  const row = trows.find(row => Number(row.dataset.userId) === currentUser.id);
+  row.style.backgroundColor = "rgba(31, 50, 59, 0.429)";
+  row.style.borderRadius = "0px";
+}
+
 function wonGame() {
   addUserAndGameData();
   balloonsContainer.style.display = "none";
@@ -185,6 +194,7 @@ function wonGame() {
     if (e.type === "click") {
       modalEndGame.style.display = "none";
       modalTable.style.display = "grid";
+      highlightCurrentUser();
     }
   });
 }
