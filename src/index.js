@@ -18,9 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function welcome() {
-  const modalForm = document.querySelector(".user-form-modal");
-  const gameHeader = document.querySelectorAll("#game-header>.fireworks");
-  modalForm.style.display = "block";
+  mainHeader.innerHTML = "<h1>Welcome to the Balloon Popper Game!</h1>";
   renderHeader(gameHeader);
   renderLogo(gameTargetGoal, 150);
   getCurrentUser(modalForm);
