@@ -38,7 +38,11 @@ const adapter = {
       body: JSON.stringify(game)
     })
       .then(resp => resp.json())
-      .then(game => new Game(game))
+      .then(game => new Game(
+        game.id,
+        game.userId,
+        game.username,
+        game.score))
       .catch((error) => {
         console.log(error.message);
       });
