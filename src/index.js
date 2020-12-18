@@ -157,8 +157,7 @@ async function addUserAndGameData() {
   const user = await adapter.createUser(username);
   await adapter.createGame(user, score);
   currentUser = user;
-  const games = new Games();
-  return games;
+  new Games();
 }
 
 function highlightCurrentUser() {
