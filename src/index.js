@@ -17,17 +17,16 @@ document.addEventListener("DOMContentLoaded", () => {
   startOver();
 });
 
-function renderWelcome() {
-  balloonsContainer.style.display = "none";
-  modalTable.style.display = "none";
+function welcome() {
+  const modalForm = document.querySelector(".user-form-modal");
+  const gameHeader = document.querySelectorAll("#game-header>.fireworks");
   modalForm.style.display = "block";
-  renderHeader();
+  renderHeader(gameHeader);
   renderLogo(gameTargetGoal, 150);
-  getCurrentUser();
+  getCurrentUser(modalForm);
 }
 
-function renderHeader() {
-  playerName.innerHTML = "<h1>Welcome to the Balloon Popper Game!</h1>";
+function renderHeader(gameHeader) {
   gameHeader.forEach(div => {
     const img = document.createElement("img");
     img.src = "images/fireworks.png";
