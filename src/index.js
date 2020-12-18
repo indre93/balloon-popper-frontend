@@ -55,10 +55,14 @@ function movingLogo(img, endingPos) {
   }
 }
 
-function getCurrentUser() {
+function getCurrentUser(modalForm) {
+  const userForm = document.querySelector(".new-user-form");
+  const userInput = document.querySelector("input#username");
+
   userForm.addEventListener("submit", (e) => {
     if (e.type === "submit") {
       e.preventDefault();
+      modalForm.style.display = "none";
       username = userInput.value;
       startNewGame();
     }
@@ -66,7 +70,7 @@ function getCurrentUser() {
 }
 
 function startNewGame() {
-  modalForm.style.display = "none";
+  const playerName = document.querySelector("#main-header");
   balloonsContainer.style.display = "grid";
   gameTargetGoal.firstElementChild.remove();
   playerName.innerHTML = `<h1>Hi! ${username}</h1>`;
@@ -106,6 +110,7 @@ function updateGameTarget(balloon) {
 }
 
 function startTimer(duration) {
+  const countdown = document.querySelector("#timer");
   let timer = duration, minutes, seconds;
   let counter = setInterval(() => {
     minutes = parseInt(timer / 60, 10);
@@ -165,6 +170,7 @@ function highlightCurrentUser() {
 
 function wonGame() {
   addUserAndGameData();
+  const endGameBalloons = document.querySelectorAll(".end-game-modal>.balloons-img");
   balloonsContainer.style.display = "none";
   modalEndGame.style.display = "grid";
   endGameBalloons.forEach(div => renderLogo(div, -190));
@@ -173,7 +179,8 @@ function wonGame() {
   h1.innerHTML = "You Win!";
   p.innerHTML = "Final Score:";
   endGameContainer.prepend(h1, p);
-  finalScore.innerHTML = score;
+  document.querySelector("#final-score").innerHTML = score;
+
   gameHeader.forEach(div => {
     div.className += " animate";
   });
@@ -190,6 +197,7 @@ function wonGame() {
 }
 
 function startOver() {
+  const startOverBtn = document.querySelector("button#start-over-btn");
   startOverBtn.addEventListener("click", (e) => {
     if (e.type === "click") {
       game = "";
