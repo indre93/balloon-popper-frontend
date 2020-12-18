@@ -172,8 +172,10 @@ function wonGame() {
   addUserAndGameData();
   document.querySelectorAll(".balloons-img").forEach(div => renderLogo(div, -190));
   document.querySelector("#final-score").innerHTML = score;
-  const h1 = document.createElement("h1").innerHTML = "You Win!";
-  const p = document.createElement("p").innerHTML = "Final Score:";
+  const h1 = document.createElement("h1");
+  const p = document.createElement("p");
+  h1.innerHTML = "You Win!";
+  p.innerHTML = "Final Score:";
   endGameContainer.prepend(h1, p);
   gameHeader.forEach(div => div.className += " animate");
   endGameBtn.innerHTML = "<p>See Scoreboard</p>";
@@ -200,8 +202,10 @@ function gameOver() {
   balloonsContainer.style.display = "none";
   modalEndGame.style.display = "grid";
   modalEndGame.style.gridTemplateColumns = "150px auto 150px";
-  const h1 = document.createElement("h1").innerHTML = "Sorry...you lost";
-  const h2 = document.createElement("h2").innerHTML = "you were so close!";
+  const h1 = document.createElement("h1");
+  const h2 = document.createElement("h2");
+  h1.innerHTML = "Sorry...you lost";
+  h2.innerHTML = "you were so close!";
   endGameContainer.prepend(h1, h2);
   endGameBtn.innerHTML = "<p>Try Again</p>";
 
