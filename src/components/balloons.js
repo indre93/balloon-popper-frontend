@@ -1,3 +1,4 @@
+const popSound = new Audio("sounds/pop.mp3");
 const balloons = [];
 const columnNum = 12;
 const rowNum = 5;
