@@ -33,7 +33,7 @@ function getBalloonImages(images, index, popped = false) {
     const img = document.createElement("img");
     const color = getBalloonColor(balloonImg, index);
     img.id = color + "-balloon";
-    img.setAttribute("popped", popped);
+    img.dataset.popped = popped;
     img.src = balloonImg;
     return img;
   });
@@ -129,7 +129,7 @@ function checkForThreeRowMatch() {
     let possibleMatch = [i, i + 1, i + 2];
     let notValid = [10, 11, 22, 23, 34, 35, 46, 47];
     if (notValid.includes(i)) continue;
-    if (balloons[i].getAttribute("popped") === "false") {
+    if (balloons[i].dataset.popped === "false") {
       popBalloon(possibleMatch, balloons[i]);
     }
   }
@@ -140,7 +140,7 @@ function checkForFourRowMatch() {
     let possibleMatch = [i, i + 1, i + 2, i + 3];
     let notValid = [9, 10, 11, 21, 22, 23, 33, 34, 35, 45, 46, 47];
     if (notValid.includes(i)) continue;
-    if (balloons[i].getAttribute("popped") === "false") {
+    if (balloons[i].dataset.popped === "false") {
       popBalloon(possibleMatch, balloons[i]);
     }
   }
@@ -151,7 +151,7 @@ function checkForFiveRowMatch() {
     let possibleMatch = [i, i + 1, i + 2, i + 3, i + 4];
     let notValid = [8, 9, 10, 11, 20, 21, 22, 23, 32, 33, 34, 35, 44, 45, 46, 47];
     if (notValid.includes(i)) continue;
-    if (balloons[i].getAttribute("popped") === "false") {
+    if (balloons[i].dataset.popped === "false") {
       popBalloon(possibleMatch, balloons[i]);
     }
   }
@@ -160,7 +160,7 @@ function checkForFiveRowMatch() {
 function checkForThreeColumnMatching() {
   for (let i = 0; i <= 35; i++) {
     let possibleMatch = [i, i + 12, i + 12 * 2];
-    if (balloons[i].getAttribute("popped") === "false") {
+    if (balloons[i].dataset.popped === "false") {
       popBalloon(possibleMatch, balloons[i]);
     }
   }
@@ -169,7 +169,7 @@ function checkForThreeColumnMatching() {
 function checkForFourColumnMatching() {
   for (let i = 0; i <= 23; i++) {
     let possibleMatch = [i, i + 12, i + 12 * 2, i + 12 * 3];
-    if (balloons[i].getAttribute("popped") === "false") {
+    if (balloons[i].dataset.popped === "false") {
       popBalloon(possibleMatch, balloons[i]);
     }
   }
@@ -178,7 +178,7 @@ function checkForFourColumnMatching() {
 function checkForFiveColumnMatching() {
   for (let i = 0; i <= 11; i++) {
     let possibleMatch = [i, i + 12, i + 12 * 2, i + 12 * 3, i + 12 * 4];
-    if (balloons[i].getAttribute("popped") === "false") {
+    if (balloons[i].dataset.popped === "false") {
       popBalloon(possibleMatch, balloons[i]);
     }
   }
@@ -191,14 +191,14 @@ function popBalloon(matchingArray, matchingBalloon) {
       setTimeout(() => {
         balloons[index].src = "images/pop.png";
         popSound.play();
-        balloons[index].setAttribute("popped", "true");
+        balloons[index].dataset.popped = "true";
       }, 0);
 
       setTimeout(() => {
-        if (balloons[index].getAttribute("popped") === "true") {
+        if (balloons[index].dataset.popped === "true") {
           updateGameTarget(balloons[index]);
           document.querySelector("#score-count>p>span").innerHTML = `${(score += 10)}`;
-          balloons[index].setAttribute("popped", "null");
+          balloons[index].dataset.popped = "null";
           balloons[index].src = "";
         }
       }, 100);
