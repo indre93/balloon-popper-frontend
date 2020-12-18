@@ -200,14 +200,7 @@ function startOver() {
   const startOverBtn = document.querySelector("button#start-over-btn");
   startOverBtn.addEventListener("click", (e) => {
     if (e.type === "click") {
-      game = "";
-      balloonsContainer.innerHTML = "";
-      balloonTargetGoals.innerHTML = "";
-      username = "";
-      playerName.innerHTML = "<h1>Welcome to the Balloon Popper Game!</h1>";
-      scoreCount.innerHTML = "<p>0</p>";
-      countdown.innerHTML = "<span>00:00</span>";
-      renderWelcome();
+      location.reload();
     }
   });
 }
@@ -223,11 +216,11 @@ function gameOver() {
   endGameContainer.prepend(h1, h2);
 
   endGameBtn.innerHTML = "<p>Try Again</p>";
+
   endGameBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (e.type === "click") {
-
-      console.log(e.type);
+      location.reload();
     }
   });
 }
