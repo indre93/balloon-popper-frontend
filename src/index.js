@@ -1,3 +1,5 @@
+// Containers
+const modalForm = document.querySelector(".user-form-modal");
 const modalTable = document.querySelector(".scoreboard-modal");
 const modalEndGame = document.querySelector(".end-game-modal");
 const balloonsContainer = document.querySelector(".balloons-container");
@@ -14,16 +16,45 @@ let score = 0;
 let timeUp = false;
 let currentUser;
 
+let display = {
+  form: () => {
+    modalForm.remo;
+    modalForm.style.display = "block";
+    balloonsContainer.style.display = "none";
+    modalEndGame.style.display = "none";
+    modalTable.style.display = "none";
+  },
+  game: () => {
+    modalForm.style.display = "none";
+    balloonsContainer.style.display = "grid";
+    modalEndGame.style.display = "none";
+    modalTable.style.display = "none";
+  },
+  endGame: () => {
+    modalForm.style.display = "none";
+    balloonsContainer.style.display = "none";
+    modalEndGame.style.display = "grid";
+    modalTable.style.display = "none";
+  },
+  scoreboard: () => {
+    modalForm.style.display = "none";
+    balloonsContainer.style.display = "none";
+    modalEndGame.style.display = "none";
+    modalTable.style.display = "grid";
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   welcome();
   startOver();
 });
 
 function welcome() {
+  display.form();
   mainHeader.innerHTML = "<h1>Welcome to the Balloon Popper Game!</h1>";
   renderHeader(gameHeader);
   renderLogo(gameTargetGoal, 150);
-  getCurrentUser(modalForm);
+  getCurrentUser();
 }
 
 function renderHeader(gameHeader) {
@@ -55,14 +86,13 @@ function movingLogo(img, endingPos) {
   }
 }
 
-function getCurrentUser(modalForm) {
+function getCurrentUser() {
   const userForm = document.querySelector(".new-user-form");
   const userInput = document.querySelector("input#username");
 
   userForm.addEventListener("submit", (e) => {
     if (e.type === "submit") {
       e.preventDefault();
-      modalForm.style.display = "none";
       username = userInput.value;
       startNewGame();
     }
@@ -70,8 +100,7 @@ function getCurrentUser(modalForm) {
 }
 
 function startNewGame() {
-  const playerName = document.querySelector("#main-header");
-  balloonsContainer.style.display = "grid";
+  display.game();
   gameTargetGoal.firstElementChild.remove();
   mainHeader.innerHTML = `<h1>Hi! ${username}</h1>`;
   renderBalloons(balloonImages, 2, false);
@@ -87,7 +116,7 @@ function renderGameExpectation() {
     span.id = balloon.id;
     arrowImg.id = "arrow-img";
     arrowImg.src = "images/arrow.png";
-    span.innerHTML = Math.floor(Math.random() * 4) + 5;
+    span.innerHTML = Math.floor(Math.random() * 5) + 4;
     balloonTargetGoals.append(balloon, arrowImg, span);
   });
 }
@@ -146,10 +175,8 @@ function mainLoop() {
 function endGame(checkMarks) {
   if (!timeUp && checkMarks.length === 6) {
     wonGame();
-  } else if (timeUp) {
-    gameOver();
   } else {
-    startOver();
+    gameOver();
   }
 }
 
@@ -169,6 +196,7 @@ function highlightCurrentUser() {
 
 function wonGame() {
   addUserAndGameData();
+  display.endGame();
   document.querySelectorAll(".balloons-img").forEach(div => renderLogo(div, -190));
   document.querySelector("#final-score").innerHTML = score;
   const h1 = document.createElement("h1");
@@ -182,8 +210,7 @@ function wonGame() {
   endGameBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (e.type === "click") {
-      modalEndGame.style.display = "none";
-      modalTable.style.display = "grid";
+      display.scoreboard();
       highlightCurrentUser();
     }
   });
@@ -198,8 +225,7 @@ function startOver() {
 }
 
 function gameOver() {
-  balloonsContainer.style.display = "none";
-  modalEndGame.style.display = "grid";
+  display.endGame();
   modalEndGame.style.gridTemplateColumns = "150px auto 150px";
   const h1 = document.createElement("h1");
   const h2 = document.createElement("h2");
