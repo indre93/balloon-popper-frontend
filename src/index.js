@@ -170,22 +170,14 @@ function highlightCurrentUser() {
 
 function wonGame() {
   addUserAndGameData();
-  const endGameBalloons = document.querySelectorAll(".end-game-modal>.balloons-img");
-  balloonsContainer.style.display = "none";
-  modalEndGame.style.display = "grid";
-  endGameBalloons.forEach(div => renderLogo(div, -190));
-  const h1 = document.createElement("h1");
-  const p = document.createElement("p");
-  h1.innerHTML = "You Win!";
-  p.innerHTML = "Final Score:";
-  endGameContainer.prepend(h1, p);
+  document.querySelectorAll(".balloons-img").forEach(div => renderLogo(div, -190));
   document.querySelector("#final-score").innerHTML = score;
-
-  gameHeader.forEach(div => {
-    div.className += " animate";
-  });
-
+  const h1 = document.createElement("h1").innerHTML = "You Win!";
+  const p = document.createElement("p").innerHTML = "Final Score:";
+  endGameContainer.prepend(h1, p);
+  gameHeader.forEach(div => div.className += " animate");
   endGameBtn.innerHTML = "<p>See Scoreboard</p>";
+
   endGameBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (e.type === "click") {
@@ -197,8 +189,7 @@ function wonGame() {
 }
 
 function startOver() {
-  const startOverBtn = document.querySelector("button#start-over-btn");
-  startOverBtn.addEventListener("click", (e) => {
+  document.getElementById("start-over-btn").addEventListener("click", (e) => {
     if (e.type === "click") {
       location.reload();
     }
@@ -209,12 +200,9 @@ function gameOver() {
   balloonsContainer.style.display = "none";
   modalEndGame.style.display = "grid";
   modalEndGame.style.gridTemplateColumns = "150px auto 150px";
-  const h1 = document.createElement("h1");
-  const h2 = document.createElement("h2");
-  h1.innerHTML = "Sorry...you lost";
-  h2.innerHTML = "you were so close!";
+  const h1 = document.createElement("h1").innerHTML = "Sorry...you lost";
+  const h2 = document.createElement("h2").innerHTML = "you were so close!";
   endGameContainer.prepend(h1, h2);
-
   endGameBtn.innerHTML = "<p>Try Again</p>";
 
   endGameBtn.addEventListener("click", (e) => {
