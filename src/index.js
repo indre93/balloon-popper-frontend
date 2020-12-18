@@ -13,7 +13,8 @@ let timeUp = false;
 let currentUser;
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderWelcome();
+  welcome();
+  startOver();
 });
 
 function renderWelcome() {
