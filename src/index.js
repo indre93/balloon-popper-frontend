@@ -18,7 +18,6 @@ let currentUser;
 
 let display = {
   form: () => {
-    modalForm.remo;
     modalForm.style.display = "block";
     balloonsContainer.style.display = "none";
     modalEndGame.style.display = "none";
