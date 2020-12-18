@@ -1,5 +1,7 @@
 const modalTable = document.querySelector(".scoreboard-modal");
 const modalEndGame = document.querySelector(".end-game-modal");
+const mainHeader = document.querySelector("#main-header");
+const gameHeader = document.querySelectorAll("#game-header>.fireworks");
 const gameTargetGoal = document.querySelector(".game-target-goal");
 const balloonTargetGoals = document.querySelector("#balloon-target-goals");
 const balloonsContainer = document.querySelector(".balloons-container");
@@ -71,7 +73,7 @@ function startNewGame() {
   const playerName = document.querySelector("#main-header");
   balloonsContainer.style.display = "grid";
   gameTargetGoal.firstElementChild.remove();
-  playerName.innerHTML = `<h1>Hi! ${username}</h1>`;
+  mainHeader.innerHTML = `<h1>Hi! ${username}</h1>`;
   renderBalloons(balloonImages, 2, false);
   renderGameExpectation();
   startTimer(duration);
