@@ -151,7 +151,7 @@ body {
   border-radius: 20px;
   justify-self: center;
   align-self: center;
-  font-size: 20px;
+  font-size: 22px;
   outline: 0;
   border-color: -internal-light-dark(rgb(66, 64, 64), rgb(79, 77, 77));
 }
@@ -275,33 +275,23 @@ input[type=text]:focus {
 
 .scoreboard-modal {
   display: none;
-  position: absolute;
   border-radius: 10px;
   z-index: 100;
   width: 700px;
   height: 500px;
   background-color: rgba(0, 0, 0, 0.4);
-  padding: 100px;
-}
-
-#scoreboard-tableContainer {
-  display: grid;
-  align-content: center;
+  padding: 85px;
   justify-content: center;
+  align-content: center;
 }
 
 table {
   background-color: rgba(104, 130, 164, 0.51);
   box-shadow: 0 2px 4px rgba(10, 10, 10, 0.639), inset 0 1px 0 rgba(255, 255, 255, 0.531);
   border-radius: 25px;
-  padding: 10px;
+  padding: 15px;
   text-align: center;
-}
-
-.tableClass thead {
-  padding: 10px;
   display: grid;
-  height: auto;
 }
 
 .tableClass thead td, .tableClass thead h1 {
@@ -313,25 +303,29 @@ table {
 }
 
 .tableClass thead td {
-  font-size: large;
+  font-size: 22px;
 }
 
 .tableClass tbody {
-  display: block;
+  display: inline-block;
   height: 150px;
   overflow-y: auto;
-  margin: 10px;
+  overflow-x: hidden;
+  margin-block: 10px;
 }
 
 .tableClass tbody td {
-  padding-left: 20px;
   padding-block: 10px;
-  width: 500px;
+  font-size: 18px;
 }
 
 .tableClass tbody tr {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: auto;
+  width: 506px;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(46, 43, 43, 0.442), inset 0 1px 0 rgba(99, 109, 132, 0.531);
+  box-shadow: 0 2px 4px rgba(46, 43, 43, 0.306), inset 0 1px 0 rgba(99, 109, 132, 0.531);
 }
 
 .tableClass tr {
@@ -348,7 +342,7 @@ table {
 
 .tableClass tbody::-webkit-scrollbar {
   border-radius: 15px;
-  width: 7px;
+  width: 6px;
   background-color: #F5F5F5;
 }
 
