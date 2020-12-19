@@ -139,7 +139,7 @@ function renderLostGame(endGameContainer, button) {
   button.innerHTML = "<p>Try Again</p>";
 }
 
-function renderScoreboardTable() {
+function renderScoreboard() {
   modalTable.innerHTML = `
       <div id="scoreboard-tableContainer">
         <table class="tableClass">
