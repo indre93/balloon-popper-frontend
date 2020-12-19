@@ -1,47 +1,9 @@
-// Containers
-const modalForm = document.querySelector(".user-form-modal");
-const modalTable = document.querySelector(".scoreboard-modal");
-const modalEndGame = document.querySelector(".end-game-modal");
-const balloonsContainer = document.querySelector(".balloons-container");
-
-const mainHeader = document.querySelector("#main-header");
-const gameHeader = document.querySelectorAll("#game-header>.fireworks");
-const gameTargetGoal = document.querySelector(".game-target-goal");
 const balloonTargetGoals = document.querySelector("#balloon-target-goals");
-const endGameContainer = document.querySelector(".end-game-container");
-const endGameBtn = document.querySelector("button#end-game-btn");
 let duration = 60 * 3;
 let username;
 let score = 0;
 let timeUp = false;
 let currentUser;
-
-let display = {
-  form: () => {
-    modalForm.style.display = "block";
-    balloonsContainer.style.display = "none";
-    modalEndGame.style.display = "none";
-    modalTable.style.display = "none";
-  },
-  game: () => {
-    modalForm.style.display = "none";
-    balloonsContainer.style.display = "grid";
-    modalEndGame.style.display = "none";
-    modalTable.style.display = "none";
-  },
-  endGame: () => {
-    modalForm.style.display = "none";
-    balloonsContainer.style.display = "none";
-    modalEndGame.style.display = "grid";
-    modalTable.style.display = "none";
-  },
-  scoreboard: () => {
-    modalForm.style.display = "none";
-    balloonsContainer.style.display = "none";
-    modalEndGame.style.display = "none";
-    modalTable.style.display = "grid";
-  }
-};
 
 document.addEventListener("DOMContentLoaded", () => {
   welcome();
@@ -49,46 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function welcome() {
-  display.form();
-  mainHeader.innerHTML = "<h1>Welcome to the Balloon Popper Game!</h1>";
-  renderHeader(gameHeader);
-  renderLogo(gameTargetGoal, 150);
+  display.welcomeView();
   getCurrentUser();
-}
-
-function renderHeader(gameHeader) {
-  gameHeader.forEach(div => {
-    const img = document.createElement("img");
-    img.src = "images/fireworks.png";
-    div.append(img);
-  });
-}
-
-function renderLogo(container, endingPos) {
-  const balloonsImg = document.createElement("img");
-  balloonsImg.src = "images/balloons-logo.png";
-  balloonsImg.id = "balloons";
-  container.prepend(balloonsImg);
-  movingLogo(balloonsImg, endingPos);
-}
-
-function movingLogo(img, endingPos) {
-  let pos = 500;
-  let id = setInterval(frame, 10);
-  function frame() {
-    if (pos == endingPos) {
-      clearInterval(id);
-    } else {
-      pos--;
-      img.style.top = pos + "px";
-    }
-  }
 }
 
 function getCurrentUser() {
   const userForm = document.querySelector(".new-user-form");
   const userInput = document.querySelector("input#username");
-
   userForm.addEventListener("submit", (e) => {
     if (e.type === "submit") {
       e.preventDefault();
@@ -99,25 +28,9 @@ function getCurrentUser() {
 }
 
 function startNewGame() {
-  display.game();
-  gameTargetGoal.firstElementChild.remove();
-  mainHeader.innerHTML = `<h1>Hi! ${username}</h1>`;
-  renderBalloons(balloonImages, 2, false);
-  renderGameExpectation();
+  display.gameView();
   startTimer(duration);
   mainLoop();
-}
-
-function renderGameExpectation() {
-  getBalloonImages(balloonExpectationImgs, 4).forEach(balloon => {
-    const arrowImg = document.createElement("img");
-    const span = document.createElement("span");
-    span.id = balloon.id;
-    arrowImg.id = "arrow-img";
-    arrowImg.src = "images/arrow.png";
-    span.innerHTML = Math.floor(Math.random() * 5) + 4;
-    balloonTargetGoals.append(balloon, arrowImg, span);
-  });
 }
 
 function updateGameTarget(balloon) {
@@ -195,22 +108,22 @@ function highlightCurrentUser() {
 
 function wonGame() {
   addUserAndGameData();
-  display.endGame();
-  document.querySelectorAll(".balloons-img").forEach(div => renderLogo(div, -190));
-  document.querySelector("#final-score").innerHTML = score;
-  const h1 = document.createElement("h1");
-  const p = document.createElement("p");
-  h1.innerHTML = "You Win!";
-  p.innerHTML = "Final Score:";
-  endGameContainer.prepend(h1, p);
-  gameHeader.forEach(div => div.className += " animate");
-  endGameBtn.innerHTML = "<p>See Scoreboard</p>";
-
-  endGameBtn.addEventListener("click", (e) => {
-    e.preventDefault();
+  display.endGameView();
+  document.getElementById("end-game-btn").addEventListener("click", (e) => {
     if (e.type === "click") {
-      display.scoreboard();
+      e.preventDefault();
+      display.scoreboardView();
       highlightCurrentUser();
+    }
+  });
+}
+
+function gameOver() {
+  display.endGameView();
+  document.getElementById("end-game-btn").addEventListener("click", (e) => {
+    if (e.type === "click") {
+      e.preventDefault();
+      location.reload();
     }
   });
 }
@@ -218,24 +131,7 @@ function wonGame() {
 function startOver() {
   document.getElementById("start-over-btn").addEventListener("click", (e) => {
     if (e.type === "click") {
-      location.reload();
-    }
-  });
-}
-
-function gameOver() {
-  display.endGame();
-  modalEndGame.style.gridTemplateColumns = "150px auto 150px";
-  const h1 = document.createElement("h1");
-  const h2 = document.createElement("h2");
-  h1.innerHTML = "Sorry...you lost";
-  h2.innerHTML = "you were so close!";
-  endGameContainer.prepend(h1, h2);
-  endGameBtn.innerHTML = "<p>Try Again</p>";
-
-  endGameBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (e.type === "click") {
+      e.preventDefault();
       location.reload();
     }
   });
