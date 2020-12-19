@@ -92,11 +92,19 @@ function mainLoop() {
   }
 }
 
-function endGame(checkMarks) {
+function gameState() {
+  const array = Array.from(balloonTargetGoals.getElementsByTagName("img"));
+  const checkMarks = array.filter(elem => elem.id === "checkMark");
+
   if (!timeUp && checkMarks.length === 6) {
+    gameStatus = "won";
     wonGame();
-  } else {
+  } else if (timeUp && checkMarks.length != 6) {
+    gameStatus = "lost";
     gameOver();
+  } else {
+    gameStatus = "pending";
+    checkForMatchingBalloons();
   }
 }
 
