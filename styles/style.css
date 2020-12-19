@@ -233,7 +233,7 @@ input[type=text]:focus {
   padding: 20px;
 }
 
-.end-game-container {
+#end-game-container {
   z-index: 100;
   display: grid;
   grid-template-columns: auto;
@@ -242,12 +242,12 @@ input[type=text]:focus {
   justify-content: center;
 }
 
-.end-game-container h1, .end-game-container p, .end-game-container h2 {
+#end-game-container h1, #end-game-container p, #end-game-container h2 {
   align-self: center;
   justify-self: center;
 }
 
-.end-game-container h1 {
+#end-game-container h1 {
   margin: 15px;
   font-size: 50px;
 }
