@@ -2,68 +2,68 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="Description" content="A Single Page Application Game">
-  <title>Balloon Popper</title>
-  <link rel="stylesheet" type="text/css" href="styles/style.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-  <link rel="shortcut icon" href="#" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Description" content="A Single Page Application Game">
+    <title>Balloon Popper</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="#" />
 </head>
 
 <body>
-  <!-- Game Header -->
-  <div class="header-class">
-    <div id="game-header">
-      <div class="fireworks"></div>
-      <div id="main-header"></div>
-      <div class="fireworks"></div>
-    </div>
-  </div>
-
-  <!-- Game Target Goals -->
-  <div class="game-target-goal">
-    <div id="balloon-target-goals"></div>
-  </div>
-
-  <!-- Game Content -->
-  <div id="game-container">
-    <!-- User Form -->
-    <div id="new-user-container" class="user-form-modal"></div>
-    <!-- Balloons Container -->
-    <div class="balloons-container"></div>
-    <!-- End Game Container -->
-    <div id="end-game-div" class="end-game-modal"></div>
-    <!-- Top Scores -->
-    <div class="scoreboard-modal"></div>
-  </div>
-
-  <div class="current-game-info">
-    <!-- Gamer Timer -->
-    <div id="timer">
-      <span>00:00</span>
+    <!-- Game Header -->
+    <div class="header-class">
+        <div id="game-header">
+            <div class="fireworks"></div>
+            <div id="main-header"></div>
+            <div class="fireworks"></div>
+        </div>
     </div>
 
-    <!-- Current Score -->
-    <div id="score-count">
-      <p>Score: <span>0</span></p>
+    <!-- Game Target Goals -->
+    <div class="game-target-goal">
+        <div id="balloon-target-goals"></div>
     </div>
 
-    <!-- Start Over Button -->
-    <button id="start-over-btn">
-      <p>Start Over</p>
-    </button>
-  </div>
+    <!-- Game Content -->
+    <div id="game-container">
+        <!-- User Form -->
+        <div id="new-user-container" class="user-form-modal"></div>
+        <!-- Balloons Container -->
+        <div class="balloons-container"></div>
+        <!-- End Game Container -->
+        <div id="end-game-div" class="end-game-modal"></div>
+        <!-- Top Scores -->
+        <div class="scoreboard-modal"></div>
+    </div>
 
-  <!-- Scripts -->
-  <script src="src/components/containers.js"></script>
-  <script src="src/components/games.js"></script>
-  <script src="src/components/balloons.js"></script>
-  <script src="src/components/game.js"></script>
-  <script src="src/components/user.js"></script>
-  <script src="src/adapters/adapter.js"></script>
-  <script src="src/index.js"></script>
+    <div class="current-game-info">
+        <!-- Gamer Timer -->
+        <div id="timer">
+            <span>00:00</span>
+        </div>
+
+        <!-- Current Score -->
+        <div id="score-count">
+            <p>Score: <span>0</span></p>
+        </div>
+
+        <!-- Start Over Button -->
+        <button id="start-over-btn">
+            <p>Start Over</p>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="src/components/containers.js"></script>
+    <script src="src/components/games.js"></script>
+    <script src="src/components/balloons.js"></script>
+    <script src="src/components/game.js"></script>
+    <script src="src/components/user.js"></script>
+    <script src="src/adapters/adapter.js"></script>
+    <script src="src/index.js"></script>
 </body>
 
 </html>
