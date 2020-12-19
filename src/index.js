@@ -79,17 +79,19 @@ function startTimer(duration) {
   }, 1000);
 };
 
-function mainLoop() {
-  const array = Array.from(balloonTargetGoals.getElementsByTagName("img"));
-  const checkMarks = array.filter(elem => elem.id === "checkMark");
+function startNewGame() {
+  display.gameView();
+  startTimer(duration);
 
-  if (!timeUp && checkMarks.length != 6) {
-    checkForMatchingBalloons();
-    requestAnimationFrame(mainLoop);
-  } else {
-    cancelAnimationFrame(mainLoop);
-    endGame(checkMarks);
-  }
+  let mainLoop = () => {
+    gameState();
+    if (gameStatus === "pending") {
+      requestAnimationFrame(mainLoop);
+    } else {
+      cancelAnimationFrame(mainLoop);
+    }
+  };
+  mainLoop();
 }
 
 function gameState() {
