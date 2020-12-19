@@ -60,16 +60,24 @@ function startTimer(duration) {
     seconds = seconds < 10 ? "0" + seconds : seconds;
     countdown.innerHTML = `<p>${minutes}:${seconds}</p>`;
     --timer;
-    if (timer < 20) {
-      countdown.childNodes[0].className = "blink";
-    }
-    if (timer < 0) {
-      clearInterval(counter);
-      timeUp = true;
-      countdown.childNodes[0].className = "";
-    }
+    stopTimer(countdown, counter);
   }, 1000);
 };
+
+function stopTimer(countdown, counter) {
+  if (timer < 20) {
+    countdown.childNodes[0].className = "blink";
+    if (timer < 0) {
+      clearInterval(counter);
+      countdown.innerHTML = "<span>00:00</span>";
+      timeUp = true;
+    }
+  }
+  if (gameStatus === "won") {
+    clearInterval(counter);
+    countdown.innerHTML = "<span>00:00</span>";
+  }
+}
 
 function mainLoop() {
   const array = Array.from(balloonTargetGoals.getElementsByTagName("img"));
