@@ -29,48 +29,14 @@
 
   <!-- Game Content -->
   <div id="game-container">
+    <!-- User Form -->
+    <div id="new-user-container" class="user-form-modal"></div>
     <!-- Balloons Container -->
     <div class="balloons-container"></div>
-
-    <!-- User Form -->
-    <div id="new-user-container" class="user-form-modal">
-      <form class="new-user-form">
-        <label for="username">Username:</label>
-        <input id="username" type="text" placeholder="Enter a username" name="username" required>
-        <input id="start-game-btn" type="submit" value="Start Game">
-      </form>
-    </div>
-
     <!-- End Game Container -->
-    <div id="end-game-div" class="end-game-modal">
-      <div class="balloons-img"></div>
-      <div class="end-game-container animate">
-        <h1 id="final-score"></h1>
-        <button id="end-game-btn"></button>
-      </div>
-      <div class="balloons-img"></div>
-    </div>
-
+    <div id="end-game-div" class="end-game-modal"></div>
     <!-- Top Scores -->
-    <div class="scoreboard-modal">
-      <div id="scoreboard-tableContainer">
-        <table class="tableClass">
-          <thead>
-            <tr>
-              <th colspan="3">
-                <h1>Top Scores</h1>
-              </th>
-            </tr>
-            <tr>
-              <td>Position</td>
-              <td>User</td>
-              <td>Score</td>
-            </tr>
-          </thead>
-          <tbody id="table-body"></tbody>
-        </table>
-      </div>
-    </div>
+    <div class="scoreboard-modal"></div>
   </div>
 
   <div class="current-game-info">
@@ -91,6 +57,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="src/components/containers.js"></script>
   <script src="src/components/games.js"></script>
   <script src="src/components/balloons.js"></script>
   <script src="src/components/game.js"></script>
