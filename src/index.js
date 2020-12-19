@@ -125,9 +125,8 @@ function highlightCurrentUser() {
 }
 
 function wonGame() {
-  addUserAndGameData();
-  gameStatus = "won";
   display.endGameView();
+  addUserAndGameData();
   document.getElementById("end-game-btn").addEventListener("click", (e) => {
     if (e.type === "click") {
       e.preventDefault();
