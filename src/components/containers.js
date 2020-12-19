@@ -92,7 +92,7 @@ function renderGameTargetGoals() {
     span.id = balloon.id;
     arrowImg.id = "arrow-img";
     arrowImg.src = "images/arrow.png";
-    span.innerHTML = Math.floor(Math.random() * 1) + 1;
+    span.innerHTML = Math.floor(Math.random() * 4) + 5;
     balloonTargetGoals.append(balloon, arrowImg, span);
   });
 }
