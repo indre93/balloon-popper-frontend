@@ -4,6 +4,7 @@ let username;
 let score = 0;
 let timeUp = false;
 let currentUser;
+let gameStatus; // pending, won, lost
 
 document.addEventListener("DOMContentLoaded", () => {
   welcome();
@@ -31,6 +32,7 @@ function startNewGame() {
   display.gameView();
   startTimer(duration);
   mainLoop();
+  gameStatus = "pending";
 }
 
 function updateGameTarget(balloon) {
@@ -116,6 +118,7 @@ function highlightCurrentUser() {
 
 function wonGame() {
   addUserAndGameData();
+  gameStatus = "won";
   display.endGameView();
   document.getElementById("end-game-btn").addEventListener("click", (e) => {
     if (e.type === "click") {
@@ -127,6 +130,7 @@ function wonGame() {
 }
 
 function gameOver() {
+  gameStatus = "lost";
   display.endGameView();
   document.getElementById("end-game-btn").addEventListener("click", (e) => {
     if (e.type === "click") {
