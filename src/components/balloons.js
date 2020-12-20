@@ -187,12 +187,9 @@ function checkForFiveColumnMatching() {
 function popBalloon(matchingArray, matchingBalloon) {
     if (matchingArray.every(index => balloons[index].src === matchingBalloon.src)) {
         matchingArray.forEach(index => {
-
-            setTimeout(() => {
-                balloons[index].src = "images/pop.png";
-                popSound.play();
-                balloons[index].dataset.popped = "true";
-            }, 0);
+            popSound.play();
+            balloons[index].src = "images/pop.png";
+            balloons[index].dataset.popped = "true";
 
             setTimeout(() => {
                 if (balloons[index].dataset.popped === "true") {
