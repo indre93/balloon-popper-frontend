@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function welcome() {
-    container.welcomeView();
+    container.display("welcome");
     getCurrentUser();
 }
 
@@ -30,9 +30,8 @@ function getCurrentUser() {
 }
 
 function startNewGame() {
-    container.gameView();
+    container.display("game");
     startTimer(duration);
-
     let mainLoop = () => {
         gameState();
         if (gameStatus === "pending") {
@@ -119,12 +118,12 @@ function highlightCurrentUser() {
 }
 
 function wonGame() {
-    container.endGameView();
+    container.display("endGame");
     addUserAndGameData();
     document.getElementById("end-game-btn").addEventListener("click", (e) => {
         if (e.type === "click") {
             e.preventDefault();
-            container.scoreBoardView();
+            container.display("scoreboard");
             highlightCurrentUser();
         }
     });
@@ -132,7 +131,7 @@ function wonGame() {
 
 function gameOver() {
     gameStatus = "lost";
-    container.endGameView();
+    container.display("endGame");
     document.getElementById("end-game-btn").addEventListener("click", (e) => {
         if (e.type === "click") {
             e.preventDefault();

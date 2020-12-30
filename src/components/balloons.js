@@ -1,4 +1,3 @@
-const balloonsContainer = document.querySelector(".balloons-container");
 const popSound = new Audio("sounds/pop.mp3");
 const balloons = [];
 const columnNum = 12;
@@ -48,11 +47,11 @@ function pickRandomBalloon() {
     const balloons = getBalloonImages(balloonImages, 2);
     const randomBalloon = balloons[Math.floor(Math.random() * balloons.length)];
 
-    if (0 < balloonsContainer.childElementCount) {
+    if (0 < container.balloonsContainer.childElementCount) {
         if (randomBalloon.id === lastBalloon.id) return pickRandomBalloon();
     }
-    if ((columnNum - 1) < balloonsContainer.childElementCount) {
-        const array = Array.from(balloonsContainer.childNodes);
+    if ((columnNum - 1) < container.balloonsContainer.childElementCount) {
+        const array = Array.from(container.balloonsContainer.childNodes);
         const num = array.indexOf(lastBalloon) + 1;
         if (randomBalloon.id === array[num - columnNum].id) return pickRandomBalloon();
     }
@@ -61,10 +60,10 @@ function pickRandomBalloon() {
 }
 
 function renderBalloons() {
-    for (let i = 0; balloonsContainer.childElementCount < (columnNum * rowNum); i++) {
+    for (let i = 0; container.balloonsContainer.childElementCount < (columnNum * rowNum); i++) {
         let randomBalloon = pickRandomBalloon();
         balloons.push(randomBalloon);
-        balloonsContainer.append(randomBalloon);
+        container.balloonsContainer.append(randomBalloon);
     }
     addEventListenersToBalloons();
 }

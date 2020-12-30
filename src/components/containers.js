@@ -7,42 +7,33 @@ class Container {
         this.modalForm = document.querySelector(".user-form-modal");
         this.modalTable = document.querySelector(".scoreboard-modal");
         this.modalEndGame = document.querySelector(".end-game-modal");
+        this.balloonsContainer = document.querySelector(".balloons-container");
         this.gameHeader = document.querySelectorAll("#game-header>.fireworks");
         this.mainHeader = document.querySelector("#main-header");
         this.gameTargetGoal = document.querySelector(".game-target-goal");
     }
 
-    welcomeView() {
-        this.modalForm.style.display = "block";
-        balloonsContainer.style.display = "none";
+    // view options => welcome, game, endGame, scoreboard
+    display(view) {
+        this.modalForm.style.display = "none";
         this.modalEndGame.style.display = "none";
         this.modalTable.style.display = "none";
-        this.renderForm();
-        this.renderHeader();
-        this.renderLogo(this.gameTargetGoal, 150);
-    }
+        this.balloonsContainer.style.display = "none";
 
-    gameView() {
-        this.modalForm.style.display = "none";
-        balloonsContainer.style.display = "grid";
-        this.modalEndGame.style.display = "none";
-        this.modalTable.style.display = "none";
-        this.renderGame();
-    }
-
-    endGameView() {
-        this.modalForm.style.display = "none";
-        balloonsContainer.style.display = "none";
-        this.modalEndGame.style.display = "grid";
-        this.modalTable.style.display = "none";
-        this.renderEndGame();
-    }
-
-    scoreBoardView() {
-        this.modalForm.style.display = "none";
-        balloonsContainer.style.display = "none";
-        this.modalEndGame.style.display = "none";
-        this.modalTable.style.display = "grid";
+        if (view === "welcome") {
+            this.modalForm.style.display = "block";
+            this.renderForm();
+            this.renderHeader();
+            this.renderLogo(this.gameTargetGoal, 150);
+        } else if (view === "game") {
+            this.balloonsContainer.style.display = "grid";
+            this.renderGame();
+        } else if (view === "endGame") {
+            this.modalEndGame.style.display = "grid";
+            this.renderEndGame();
+        } else if (view === "scoreboard") {
+            this.modalTable.style.display = "grid";
+        }
     }
 
     renderForm() {
