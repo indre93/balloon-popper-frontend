@@ -1,4 +1,5 @@
 const balloonTargetGoals = document.querySelector("#balloon-target-goals");
+let container = new Container();
 let duration = 60 * 3;
 let username;
 let score = 0;
@@ -12,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function welcome() {
-    display.welcomeView();
+    container.welcomeView();
     getCurrentUser();
 }
 
@@ -29,7 +30,7 @@ function getCurrentUser() {
 }
 
 function startNewGame() {
-    display.gameView();
+    container.gameView();
     startTimer(duration);
 
     let mainLoop = () => {
@@ -118,12 +119,12 @@ function highlightCurrentUser() {
 }
 
 function wonGame() {
-    display.endGameView();
+    container.endGameView();
     addUserAndGameData();
     document.getElementById("end-game-btn").addEventListener("click", (e) => {
         if (e.type === "click") {
             e.preventDefault();
-            display.scoreboardView();
+            container.scoreBoardView();
             highlightCurrentUser();
         }
     });
@@ -131,7 +132,7 @@ function wonGame() {
 
 function gameOver() {
     gameStatus = "lost";
-    display.endGameView();
+    container.endGameView();
     document.getElementById("end-game-btn").addEventListener("click", (e) => {
         if (e.type === "click") {
             e.preventDefault();

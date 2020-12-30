@@ -7,7 +7,6 @@ class Container {
         this.modalForm = document.querySelector(".user-form-modal");
         this.modalTable = document.querySelector(".scoreboard-modal");
         this.modalEndGame = document.querySelector(".end-game-modal");
-        this.balloonsContainer = document.querySelector(".balloons-container");
         this.gameHeader = document.querySelectorAll("#game-header>.fireworks");
         this.mainHeader = document.querySelector("#main-header");
         this.gameTargetGoal = document.querySelector(".game-target-goal");
@@ -15,7 +14,7 @@ class Container {
 
     welcomeView() {
         this.modalForm.style.display = "block";
-        this.balloonsContainer.style.display = "none";
+        balloonsContainer.style.display = "none";
         this.modalEndGame.style.display = "none";
         this.modalTable.style.display = "none";
         this.renderForm();
@@ -25,7 +24,7 @@ class Container {
 
     gameView() {
         this.modalForm.style.display = "none";
-        this.balloonsContainer.style.display = "grid";
+        balloonsContainer.style.display = "grid";
         this.modalEndGame.style.display = "none";
         this.modalTable.style.display = "none";
         this.renderGame();
@@ -33,7 +32,7 @@ class Container {
 
     endGameView() {
         this.modalForm.style.display = "none";
-        this.balloonsContainer.style.display = "none";
+        balloonsContainer.style.display = "none";
         this.modalEndGame.style.display = "grid";
         this.modalTable.style.display = "none";
         this.renderEndGame();
@@ -41,7 +40,7 @@ class Container {
 
     scoreBoardView() {
         this.modalForm.style.display = "none";
-        this.balloonsContainer.style.display = "none";
+        balloonsContainer.style.display = "none";
         this.modalEndGame.style.display = "none";
         this.modalTable.style.display = "grid";
     }

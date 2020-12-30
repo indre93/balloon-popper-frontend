@@ -15,7 +15,7 @@ class Games {
                 )));
             })
             .then(() => {
-                renderScoreboard();
+                container.renderScoreboard();
                 this.sortedByScore().forEach(game => {
                     this.addToTable(game);
                 });

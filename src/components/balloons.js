@@ -1,3 +1,4 @@
+const balloonsContainer = document.querySelector(".balloons-container");
 const popSound = new Audio("sounds/pop.mp3");
 const balloons = [];
 const columnNum = 12;
